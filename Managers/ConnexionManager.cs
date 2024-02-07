@@ -18,9 +18,6 @@ namespace Mots_Merveilles.Managers
         private DataTable dt;//Tableau de données, où seront stockées les données récupérées
         private SqlDataAdapter sda;//transforme les données SQL en données C#
         private string strConnection;//stocke la chaine de connexion à la base de données
-        //private static ConnexionManager instance;
-        //private User userCo;
-        //private string strConnection;
 
         public ConnexionManager() //Constructeur
         {
@@ -79,56 +76,5 @@ namespace Mots_Merveilles.Managers
             return nbRow;
         }
 
-        //public static ConnexionManager Instance
-        //{
-        //    get
-        //    {
-        //        if (instance == null)
-        //        {
-        //            instance = new ConnexionManager();
-        //        }
-        //        return instance;
-        //    }
-        //}
-
-        //public User UserCo
-        //{
-        //    get { return userCo; }
-        //    set { userCo = value; }
-        //}
-
-        //public bool Authentication(string username, string password)
-        //{
-        //    using MySqlConnection connection = new(strConnection);
-
-        //    try
-        //    {
-        //        connection.Open();
-        //        string query = "SELECT * FROM staff WHERE username=@login AND password=@password;";
-        //        using MySqlCommand cmd = new MySqlCommand(query, connection);
-        //        cmd.Parameters.AddWithValue("@login", username);
-        //        cmd.Parameters.AddWithValue("@password", password);
-        //        using MySqlDataReader reader = cmd.ExecuteReader();
-
-        //        if (reader.Read())
-        //        {
-        //            int id = reader.GetInt32("ID_staff");
-        //            string lastName = reader.GetString("last_name");
-        //            string firstName = reader.GetString("first_name");
-        //            bool isActif = reader.GetBoolean("is_active");
-        //            string userGroup = reader.GetString("user_group");
-        //            UserCo = new User(id, lastName, firstName, username, isActif, userGroup);
-        //            MessageBox.Show("Connection réussie !");
-        //            return true;
-
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message.ToString(), "ERROR");
-        //    }
-        //    return false;
-
-        //}
     }
 }

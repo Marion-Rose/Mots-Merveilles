@@ -1,4 +1,5 @@
 using Mots_Merveilles.Forms;
+using Mots_Merveilles.Managers;
 
 namespace Mots_Merveilles
 {
@@ -7,8 +8,13 @@ namespace Mots_Merveilles
         public Accueil()
         {
             InitializeComponent();
+            linkLbUtilisateur.Text = Authentification.Instance().UtilisateurCo.GetNom() + " " + Authentification.Instance().UtilisateurCo.GetPrenom();
         }
 
+        private void Accueil_Load(object sender, EventArgs e)
+        {
+
+        }
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -40,6 +46,11 @@ namespace Mots_Merveilles
             Administration Obj = new Administration();
             Obj.Show();
             this.Hide();
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

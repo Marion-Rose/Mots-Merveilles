@@ -59,5 +59,16 @@ namespace Mots_Merveilles.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _7407996_icone_utilisateur_icone_personne_symbole_client_connexion_tete_signe_icone_conception_vectoriel {
+            get {
+                object obj = ResourceManager.GetObject("7407996-icone-utilisateur-icone-personne-symbole-client-connexion-tete-signe-icon" +
+                        "e-conception-vectoriel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

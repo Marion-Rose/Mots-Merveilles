@@ -36,8 +36,11 @@
             lbMenuLivre = new Label();
             lbMenuAccueil = new Label();
             pictureBox1 = new PictureBox();
+            linkLbUtilisateur = new LinkLabel();
+            pictureBox2 = new PictureBox();
             pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // pnlMenu
@@ -49,16 +52,16 @@
             pnlMenu.Controls.Add(lbMenuClients);
             pnlMenu.Controls.Add(lbMenuLivre);
             pnlMenu.Controls.Add(lbMenuAccueil);
-            pnlMenu.Location = new Point(266, 51);
+            pnlMenu.Location = new Point(298, 51);
             pnlMenu.Name = "pnlMenu";
-            pnlMenu.Size = new Size(1066, 73);
+            pnlMenu.Size = new Size(939, 73);
             pnlMenu.TabIndex = 0;
             // 
             // lbMenuAdministration
             // 
             lbMenuAdministration.AutoSize = true;
             lbMenuAdministration.ForeColor = Color.FloralWhite;
-            lbMenuAdministration.Location = new Point(838, 24);
+            lbMenuAdministration.Location = new Point(726, 24);
             lbMenuAdministration.Name = "lbMenuAdministration";
             lbMenuAdministration.Size = new Size(171, 21);
             lbMenuAdministration.TabIndex = 3;
@@ -69,7 +72,7 @@
             // 
             lbMenuCommandes.AutoSize = true;
             lbMenuCommandes.ForeColor = Color.FloralWhite;
-            lbMenuCommandes.Location = new Point(598, 24);
+            lbMenuCommandes.Location = new Point(524, 24);
             lbMenuCommandes.Name = "lbMenuCommandes";
             lbMenuCommandes.Size = new Size(136, 21);
             lbMenuCommandes.TabIndex = 3;
@@ -80,7 +83,7 @@
             // 
             lbMenuClients.AutoSize = true;
             lbMenuClients.ForeColor = Color.FloralWhite;
-            lbMenuClients.Location = new Point(409, 24);
+            lbMenuClients.Location = new Point(366, 24);
             lbMenuClients.Name = "lbMenuClients";
             lbMenuClients.Size = new Size(92, 21);
             lbMenuClients.TabIndex = 3;
@@ -91,7 +94,7 @@
             // 
             lbMenuLivre.AutoSize = true;
             lbMenuLivre.ForeColor = Color.FloralWhite;
-            lbMenuLivre.Location = new Point(233, 24);
+            lbMenuLivre.Location = new Point(210, 24);
             lbMenuLivre.Name = "lbMenuLivre";
             lbMenuLivre.Size = new Size(78, 21);
             lbMenuLivre.TabIndex = 3;
@@ -119,11 +122,37 @@
             pictureBox1.TabIndex = 1;
             pictureBox1.TabStop = false;
             // 
+            // linkLbUtilisateur
+            // 
+            linkLbUtilisateur.BackColor = SystemColors.Control;
+            linkLbUtilisateur.ForeColor = SystemColors.ControlDark;
+            linkLbUtilisateur.LinkColor = Color.FromArgb(107, 57, 57);
+            linkLbUtilisateur.Location = new Point(1253, 59);
+            linkLbUtilisateur.Name = "linkLbUtilisateur";
+            linkLbUtilisateur.Size = new Size(174, 54);
+            linkLbUtilisateur.TabIndex = 2;
+            linkLbUtilisateur.TabStop = true;
+            linkLbUtilisateur.Text = "Utilisateur connecté";
+            linkLbUtilisateur.TextAlign = ContentAlignment.MiddleRight;
+            linkLbUtilisateur.VisitedLinkColor = Color.FromArgb(107, 57, 57);
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = Properties.Resources._7407996_icone_utilisateur_icone_personne_symbole_client_connexion_tete_signe_icone_conception_vectoriel;
+            pictureBox2.Location = new Point(1433, 51);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(91, 73);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 3;
+            pictureBox2.TabStop = false;
+            // 
             // Accueil
             // 
             AutoScaleDimensions = new SizeF(14F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1567, 903);
+            Controls.Add(pictureBox2);
+            Controls.Add(linkLbUtilisateur);
             Controls.Add(pictureBox1);
             Controls.Add(pnlMenu);
             Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point);
@@ -134,6 +163,7 @@
             pnlMenu.ResumeLayout(false);
             pnlMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
         }
 
@@ -146,5 +176,8 @@
         private Label lbMenuCommandes;
         private Label lbMenuClients;
         private Label lbMenuLivre;
+        private LinkLabel linkLbUtilisateur;
+        private Label lbBienvenue;
+        private PictureBox pictureBox2;
     }
 }

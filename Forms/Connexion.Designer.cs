@@ -99,6 +99,7 @@
             btConnexion.TabIndex = 7;
             btConnexion.Text = "Se connecter";
             btConnexion.UseVisualStyleBackColor = false;
+            btConnexion.Click += btConnexion_Click;
             // 
             // btReinitialiser
             // 
