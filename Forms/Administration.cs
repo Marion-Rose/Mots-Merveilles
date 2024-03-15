@@ -17,7 +17,7 @@ namespace Mots_Merveilles.Forms
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btAuteurs_Click(object sender, EventArgs e)
         {
             Auteurs Obj = new Auteurs();
             Obj.Show();

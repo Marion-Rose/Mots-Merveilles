@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace Mots_Merveilles.Forms
 {
-    public partial class Commandes : Accueil
+    public partial class CRCommande : Form
     {
-        public Commandes()
+        public CRCommande()
         {
             InitializeComponent();
         }
 
-        private void lbTitre_Click(object sender, EventArgs e)
+        private void lbISBN_Click(object sender, EventArgs e)
         {
 
         }

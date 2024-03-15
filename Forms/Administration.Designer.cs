@@ -44,7 +44,7 @@
             btAuteurs.TabIndex = 2;
             btAuteurs.Text = "Auteurs";
             btAuteurs.UseVisualStyleBackColor = false;
-            btAuteurs.Click += button1_Click;
+            btAuteurs.Click += btAuteurs_Click;
             // 
             // btEditeurs
             // 

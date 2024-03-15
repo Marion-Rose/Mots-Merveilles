@@ -110,7 +110,7 @@
             lbMenuAccueil.Size = new Size(94, 21);
             lbMenuAccueil.TabIndex = 2;
             lbMenuAccueil.Text = "Accueil";
-            lbMenuAccueil.Click += label1_Click;
+            lbMenuAccueil.Click += lbMenuAccueil_Click;
             // 
             // pictureBox1
             // 
@@ -177,7 +177,6 @@
         private Label lbMenuClients;
         private Label lbMenuLivre;
         private LinkLabel linkLbUtilisateur;
-        private Label lbBienvenue;
         private PictureBox pictureBox2;
     }
 }

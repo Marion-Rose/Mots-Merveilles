@@ -20,13 +20,17 @@ namespace Mots_Merveilles.Forms
         {
             InitializeComponent();
             connexion = new ConnexionManager();
+#pragma warning disable CS8622 // La nullabilité des types référence dans le type du paramètre ne correspond pas au délégué cible (probablement en raison des attributs de nullabilité).
             this.Load += TypesLivre_Load;
+#pragma warning restore CS8622 // La nullabilité des types référence dans le type du paramètre ne correspond pas au délégué cible (probablement en raison des attributs de nullabilité).
             AfficherTypes();
         }
 
         private void TypesLivre_Load(object sender, EventArgs e)
         {
+#pragma warning disable CS8622 // La nullabilité des types référence dans le type du paramètre ne correspond pas au délégué cible (probablement en raison des attributs de nullabilité).
             dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
+#pragma warning restore CS8622 // La nullabilité des types référence dans le type du paramètre ne correspond pas au délégué cible (probablement en raison des attributs de nullabilité).
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
