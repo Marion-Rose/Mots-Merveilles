@@ -267,6 +267,7 @@
             Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point);
             Margin = new Padding(5, 3, 5, 3);
             Name = "CRClient";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "CRClient";
             ResumeLayout(false);
             PerformLayout();

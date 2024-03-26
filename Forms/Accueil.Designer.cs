@@ -37,12 +37,10 @@
             pictureBox1 = new PictureBox();
             linkLbUtilisateur = new LinkLabel();
             pictureBox2 = new PictureBox();
-            pictureBox3 = new PictureBox();
-            lbBienvenue = new Label();
+            panelContenu = new Panel();
             pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
             // 
             // pnlMenu
@@ -144,33 +142,19 @@
             pictureBox2.TabIndex = 3;
             pictureBox2.TabStop = false;
             // 
-            // pictureBox3
+            // panelContenu
             // 
-            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(417, 324);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(701, 424);
-            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox3.TabIndex = 4;
-            pictureBox3.TabStop = false;
-            // 
-            // lbBienvenue
-            // 
-            lbBienvenue.AutoSize = true;
-            lbBienvenue.Font = new Font("Copperplate Gothic Bold", 24F, FontStyle.Regular, GraphicsUnit.Point);
-            lbBienvenue.Location = new Point(633, 201);
-            lbBienvenue.Name = "lbBienvenue";
-            lbBienvenue.Size = new Size(280, 44);
-            lbBienvenue.TabIndex = 5;
-            lbBienvenue.Text = "Bienvenue !";
+            panelContenu.Location = new Point(50, 178);
+            panelContenu.Name = "panelContenu";
+            panelContenu.Size = new Size(1459, 685);
+            panelContenu.TabIndex = 6;
             // 
             // Accueil
             // 
             AutoScaleDimensions = new SizeF(14F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1567, 903);
-            Controls.Add(lbBienvenue);
-            Controls.Add(pictureBox3);
+            Controls.Add(panelContenu);
             Controls.Add(pictureBox2);
             Controls.Add(linkLbUtilisateur);
             Controls.Add(pictureBox1);
@@ -184,9 +168,7 @@
             pnlMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -199,7 +181,6 @@
         private Label lbMenuLivre;
         private LinkLabel linkLbUtilisateur;
         private PictureBox pictureBox2;
-        private PictureBox pictureBox3;
-        private Label lbBienvenue;
+        private Panel panelContenu;
     }
 }

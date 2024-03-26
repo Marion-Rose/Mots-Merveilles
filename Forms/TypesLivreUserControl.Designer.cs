@@ -1,6 +1,6 @@
 ﻿namespace Mots_Merveilles.Forms
 {
-    partial class TypesLivre
+    partial class TypesLivreUserControl
     {
         /// <summary>
         /// Required designer variable.
@@ -43,9 +43,10 @@
             btSupprimer.BackColor = Color.FromArgb(107, 59, 59);
             btSupprimer.FlatStyle = FlatStyle.Flat;
             btSupprimer.ForeColor = Color.FloralWhite;
-            btSupprimer.Location = new Point(1050, 277);
+            btSupprimer.Location = new Point(700, 102);
+            btSupprimer.Margin = new Padding(2, 3, 2, 3);
             btSupprimer.Name = "btSupprimer";
-            btSupprimer.Size = new Size(272, 34);
+            btSupprimer.Size = new Size(155, 32);
             btSupprimer.TabIndex = 21;
             btSupprimer.Text = "Supprimer";
             btSupprimer.UseVisualStyleBackColor = false;
@@ -55,9 +56,10 @@
             // 
             btModifier.BackColor = Color.Tan;
             btModifier.FlatStyle = FlatStyle.Flat;
-            btModifier.Location = new Point(746, 277);
+            btModifier.Location = new Point(526, 102);
+            btModifier.Margin = new Padding(2, 3, 2, 3);
             btModifier.Name = "btModifier";
-            btModifier.Size = new Size(272, 34);
+            btModifier.Size = new Size(155, 32);
             btModifier.TabIndex = 20;
             btModifier.Text = "Modifier";
             btModifier.UseVisualStyleBackColor = false;
@@ -67,9 +69,10 @@
             // 
             btCreer.BackColor = Color.Tan;
             btCreer.FlatStyle = FlatStyle.Flat;
-            btCreer.Location = new Point(422, 277);
+            btCreer.Location = new Point(341, 102);
+            btCreer.Margin = new Padding(2, 3, 2, 3);
             btCreer.Name = "btCreer";
-            btCreer.Size = new Size(272, 34);
+            btCreer.Size = new Size(155, 32);
             btCreer.TabIndex = 19;
             btCreer.Text = "Créer";
             btCreer.UseVisualStyleBackColor = false;
@@ -78,9 +81,10 @@
             // lbType
             // 
             lbType.AutoSize = true;
-            lbType.Location = new Point(702, 188);
+            lbType.Location = new Point(451, 37);
+            lbType.Margin = new Padding(2, 0, 2, 0);
             lbType.Name = "lbType";
-            lbType.Size = new Size(58, 21);
+            lbType.Size = new Size(40, 20);
             lbType.TabIndex = 16;
             lbType.Text = "Type";
             lbType.Click += lbNomAuteur_Click;
@@ -89,14 +93,15 @@
             // 
             txtType.BackColor = Color.White;
             txtType.BorderStyle = BorderStyle.FixedSingle;
-            txtType.Location = new Point(774, 186);
+            txtType.Location = new Point(525, 35);
+            txtType.Margin = new Padding(2, 3, 2, 3);
             txtType.Name = "txtType";
-            txtType.Size = new Size(271, 29);
+            txtType.Size = new Size(156, 27);
             txtType.TabIndex = 15;
             // 
             // dataGridView1
             // 
-            dataGridView1.BackgroundColor = Color.FloralWhite;
+            dataGridView1.BackgroundColor = SystemColors.Control;
             dataGridView1.BorderStyle = BorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
@@ -107,32 +112,27 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(422, 354);
+            dataGridView1.Location = new Point(50, 169);
+            dataGridView1.Margin = new Padding(2, 3, 2, 3);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.RowTemplate.Height = 29;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(900, 486);
+            dataGridView1.Size = new Size(1098, 322);
             dataGridView1.TabIndex = 24;
             // 
-            // TypesLivre
+            // TypesLivreUserControl
             // 
-            AutoScaleDimensions = new SizeF(14F, 21F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1567, 903);
+            AutoScaleMode = AutoScaleMode.None;
             Controls.Add(dataGridView1);
             Controls.Add(btSupprimer);
             Controls.Add(btModifier);
             Controls.Add(btCreer);
             Controls.Add(lbType);
             Controls.Add(txtType);
-            Name = "TypesLivre";
-            Controls.SetChildIndex(txtType, 0);
-            Controls.SetChildIndex(lbType, 0);
-            Controls.SetChildIndex(btCreer, 0);
-            Controls.SetChildIndex(btModifier, 0);
-            Controls.SetChildIndex(btSupprimer, 0);
-            Controls.SetChildIndex(dataGridView1, 0);
+            Margin = new Padding(2, 3, 2, 3);
+            Name = "TypesLivreUserControl";
+            Size = new Size(1204, 558);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();

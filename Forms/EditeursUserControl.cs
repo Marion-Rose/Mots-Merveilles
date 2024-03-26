@@ -12,10 +12,10 @@ using System.Windows.Forms;
 
 namespace Mots_Merveilles.Forms
 {
-    public partial class Editeurs : Administration
+    public partial class EditeursUserControl : UserControl
     {
         ConnexionManager connexion;
-        public Editeurs()
+        public EditeursUserControl()
         {
             InitializeComponent();
             connexion = new ConnexionManager();

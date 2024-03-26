@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Mots_Merveilles.Forms
 {
-    public partial class Commandes : Accueil
+    public partial class MenuCommandesUserControl : UserControl
     {
-        public Commandes()
+        public MenuCommandesUserControl()
         {
             InitializeComponent();
         }
