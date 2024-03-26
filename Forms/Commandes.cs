@@ -17,6 +17,11 @@ namespace Mots_Merveilles.Forms
             InitializeComponent();
         }
 
+        private void Commandes_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void lbTitre_Click(object sender, EventArgs e)
         {
 

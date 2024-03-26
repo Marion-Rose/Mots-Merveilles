@@ -33,7 +33,9 @@
             btCreer = new Button();
             dataGridView1 = new DataGridView();
             lbTitre = new Label();
+            dataGridView2 = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             SuspendLayout();
             // 
             // btSupprimer
@@ -94,12 +96,25 @@
             lbTitre.Text = "Liste des Commandes";
             lbTitre.Click += lbTitre_Click;
             // 
+            // dataGridView2
+            // 
+            dataGridView2.BackgroundColor = Color.FloralWhite;
+            dataGridView2.BorderStyle = BorderStyle.None;
+            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView2.Location = new Point(298, 232);
+            dataGridView2.Name = "dataGridView2";
+            dataGridView2.RowHeadersWidth = 51;
+            dataGridView2.RowTemplate.Height = 29;
+            dataGridView2.Size = new Size(1217, 634);
+            dataGridView2.TabIndex = 21;
+            // 
             // Commandes
             // 
             AutoScaleDimensions = new SizeF(14F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FloralWhite;
             ClientSize = new Size(1567, 903);
+            Controls.Add(dataGridView2);
             Controls.Add(lbTitre);
             Controls.Add(dataGridView1);
             Controls.Add(btSupprimer);
@@ -111,7 +126,9 @@
             Controls.SetChildIndex(btSupprimer, 0);
             Controls.SetChildIndex(dataGridView1, 0);
             Controls.SetChildIndex(lbTitre, 0);
+            Controls.SetChildIndex(dataGridView2, 0);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -122,5 +139,6 @@
         private Button btCreer;
         private DataGridView dataGridView1;
         private Label lbTitre;
+        private DataGridView dataGridView2;
     }
 }

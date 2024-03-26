@@ -47,5 +47,16 @@ namespace Mots_Merveilles
             Obj.Show();
             this.Hide();
         }
+
+        private void lbMenu_MouseEnter(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Hand;
+        }
+
+        private void lbMenu_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+        }
+
     }
 }
