@@ -1,6 +1,6 @@
 ﻿namespace Mots_Merveilles.Forms
 {
-    partial class Auteurs
+    partial class AuteursUserControl
     {
         /// <summary>
         /// Required designer variable.
@@ -44,17 +44,19 @@
             // 
             txtNomAuteur.BackColor = Color.White;
             txtNomAuteur.BorderStyle = BorderStyle.FixedSingle;
-            txtNomAuteur.Location = new Point(531, 185);
+            txtNomAuteur.Location = new Point(383, 29);
+            txtNomAuteur.Margin = new Padding(2, 3, 2, 3);
             txtNomAuteur.Name = "txtNomAuteur";
-            txtNomAuteur.Size = new Size(271, 29);
+            txtNomAuteur.Size = new Size(186, 27);
             txtNomAuteur.TabIndex = 7;
             // 
             // lbNomAuteur
             // 
             lbNomAuteur.AutoSize = true;
-            lbNomAuteur.Location = new Point(459, 187);
+            lbNomAuteur.Location = new Point(297, 31);
+            lbNomAuteur.Margin = new Padding(2, 0, 2, 0);
             lbNomAuteur.Name = "lbNomAuteur";
-            lbNomAuteur.Size = new Size(57, 21);
+            lbNomAuteur.Size = new Size(42, 20);
             lbNomAuteur.TabIndex = 8;
             lbNomAuteur.Text = "Nom";
             lbNomAuteur.Click += label2_Click;
@@ -62,9 +64,10 @@
             // lbPrenomAuteur
             // 
             lbPrenomAuteur.AutoSize = true;
-            lbPrenomAuteur.Location = new Point(874, 187);
+            lbPrenomAuteur.Location = new Point(646, 31);
+            lbPrenomAuteur.Margin = new Padding(2, 0, 2, 0);
             lbPrenomAuteur.Name = "lbPrenomAuteur";
-            lbPrenomAuteur.Size = new Size(93, 21);
+            lbPrenomAuteur.Size = new Size(60, 20);
             lbPrenomAuteur.TabIndex = 10;
             lbPrenomAuteur.Text = "Prénom";
             // 
@@ -72,9 +75,10 @@
             // 
             txtPrenomAuteur.BackColor = Color.White;
             txtPrenomAuteur.BorderStyle = BorderStyle.FixedSingle;
-            txtPrenomAuteur.Location = new Point(983, 185);
+            txtPrenomAuteur.Location = new Point(757, 29);
+            txtPrenomAuteur.Margin = new Padding(2, 3, 2, 3);
             txtPrenomAuteur.Name = "txtPrenomAuteur";
-            txtPrenomAuteur.Size = new Size(271, 29);
+            txtPrenomAuteur.Size = new Size(181, 27);
             txtPrenomAuteur.TabIndex = 9;
             // 
             // btSupprimer
@@ -82,9 +86,10 @@
             btSupprimer.BackColor = Color.FromArgb(107, 59, 59);
             btSupprimer.FlatStyle = FlatStyle.Flat;
             btSupprimer.ForeColor = Color.FloralWhite;
-            btSupprimer.Location = new Point(1043, 284);
+            btSupprimer.Location = new Point(708, 108);
+            btSupprimer.Margin = new Padding(2, 3, 2, 3);
             btSupprimer.Name = "btSupprimer";
-            btSupprimer.Size = new Size(272, 34);
+            btSupprimer.Size = new Size(155, 32);
             btSupprimer.TabIndex = 13;
             btSupprimer.Text = "Supprimer";
             btSupprimer.UseVisualStyleBackColor = false;
@@ -94,9 +99,10 @@
             // 
             btModifier.BackColor = Color.Tan;
             btModifier.FlatStyle = FlatStyle.Flat;
-            btModifier.Location = new Point(739, 284);
+            btModifier.Location = new Point(534, 108);
+            btModifier.Margin = new Padding(2, 3, 2, 3);
             btModifier.Name = "btModifier";
-            btModifier.Size = new Size(272, 34);
+            btModifier.Size = new Size(155, 32);
             btModifier.TabIndex = 12;
             btModifier.Text = "Modifier";
             btModifier.UseVisualStyleBackColor = false;
@@ -106,9 +112,10 @@
             // 
             btCreer.BackColor = Color.Tan;
             btCreer.FlatStyle = FlatStyle.Flat;
-            btCreer.Location = new Point(415, 284);
+            btCreer.Location = new Point(349, 108);
+            btCreer.Margin = new Padding(2, 3, 2, 3);
             btCreer.Name = "btCreer";
-            btCreer.Size = new Size(272, 34);
+            btCreer.Size = new Size(155, 32);
             btCreer.TabIndex = 11;
             btCreer.Text = "Créer";
             btCreer.UseVisualStyleBackColor = false;
@@ -116,7 +123,7 @@
             // 
             // dataGridView1
             // 
-            dataGridView1.BackgroundColor = Color.FloralWhite;
+            dataGridView1.BackgroundColor = SystemColors.Control;
             dataGridView1.BorderStyle = BorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
@@ -127,19 +134,18 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(415, 354);
+            dataGridView1.Location = new Point(167, 178);
+            dataGridView1.Margin = new Padding(2, 3, 2, 3);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.RowTemplate.Height = 29;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(900, 487);
+            dataGridView1.Size = new Size(887, 365);
             dataGridView1.TabIndex = 23;
             // 
-            // Auteurs
+            // AuteursUserControl
             // 
-            AutoScaleDimensions = new SizeF(14F, 21F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1567, 903);
+            AutoScaleMode = AutoScaleMode.None;
             Controls.Add(dataGridView1);
             Controls.Add(btSupprimer);
             Controls.Add(btModifier);
@@ -148,15 +154,9 @@
             Controls.Add(txtPrenomAuteur);
             Controls.Add(lbNomAuteur);
             Controls.Add(txtNomAuteur);
-            Name = "Auteurs";
-            Controls.SetChildIndex(txtNomAuteur, 0);
-            Controls.SetChildIndex(lbNomAuteur, 0);
-            Controls.SetChildIndex(txtPrenomAuteur, 0);
-            Controls.SetChildIndex(lbPrenomAuteur, 0);
-            Controls.SetChildIndex(btCreer, 0);
-            Controls.SetChildIndex(btModifier, 0);
-            Controls.SetChildIndex(btSupprimer, 0);
-            Controls.SetChildIndex(dataGridView1, 0);
+            Margin = new Padding(2, 3, 2, 3);
+            Name = "AuteursUserControl";
+            Size = new Size(1204, 558);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();

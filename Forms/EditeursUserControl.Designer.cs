@@ -1,6 +1,6 @@
 ﻿namespace Mots_Merveilles.Forms
 {
-    partial class Editeurs
+    partial class EditeursUserControl
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             dataGridView1 = new DataGridView();
             btSupprimer = new Button();
             btModifier = new Button();
@@ -46,23 +46,24 @@
             // 
             // dataGridView1
             // 
-            dataGridView1.BackgroundColor = Color.FloralWhite;
+            dataGridView1.BackgroundColor = SystemColors.Control;
             dataGridView1.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = Color.Transparent;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Control;
+            dataGridViewCellStyle2.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = Color.Transparent;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(415, 373);
+            dataGridView1.Location = new Point(54, 222);
+            dataGridView1.Margin = new Padding(2, 3, 2, 3);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.RowTemplate.Height = 29;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(900, 486);
+            dataGridView1.Size = new Size(1098, 275);
             dataGridView1.TabIndex = 22;
             // 
             // btSupprimer
@@ -70,9 +71,10 @@
             btSupprimer.BackColor = Color.FromArgb(107, 59, 59);
             btSupprimer.FlatStyle = FlatStyle.Flat;
             btSupprimer.ForeColor = Color.FloralWhite;
-            btSupprimer.Location = new Point(1043, 285);
+            btSupprimer.Location = new Point(703, 157);
+            btSupprimer.Margin = new Padding(2, 3, 2, 3);
             btSupprimer.Name = "btSupprimer";
-            btSupprimer.Size = new Size(272, 34);
+            btSupprimer.Size = new Size(155, 32);
             btSupprimer.TabIndex = 21;
             btSupprimer.Text = "Supprimer";
             btSupprimer.UseVisualStyleBackColor = false;
@@ -82,9 +84,10 @@
             // 
             btModifier.BackColor = Color.Tan;
             btModifier.FlatStyle = FlatStyle.Flat;
-            btModifier.Location = new Point(739, 285);
+            btModifier.Location = new Point(529, 157);
+            btModifier.Margin = new Padding(2, 3, 2, 3);
             btModifier.Name = "btModifier";
-            btModifier.Size = new Size(272, 34);
+            btModifier.Size = new Size(155, 32);
             btModifier.TabIndex = 20;
             btModifier.Text = "Modifier";
             btModifier.UseVisualStyleBackColor = false;
@@ -94,9 +97,10 @@
             // 
             btCreer.BackColor = Color.Tan;
             btCreer.FlatStyle = FlatStyle.Flat;
-            btCreer.Location = new Point(415, 285);
+            btCreer.Location = new Point(344, 157);
+            btCreer.Margin = new Padding(2, 3, 2, 3);
             btCreer.Name = "btCreer";
-            btCreer.Size = new Size(272, 34);
+            btCreer.Size = new Size(155, 32);
             btCreer.TabIndex = 19;
             btCreer.Text = "Créer";
             btCreer.UseVisualStyleBackColor = false;
@@ -105,9 +109,10 @@
             // lbAdresseEditeur
             // 
             lbAdresseEditeur.AutoSize = true;
-            lbAdresseEditeur.Location = new Point(844, 158);
+            lbAdresseEditeur.Location = new Point(613, 29);
+            lbAdresseEditeur.Margin = new Padding(2, 0, 2, 0);
             lbAdresseEditeur.Name = "lbAdresseEditeur";
-            lbAdresseEditeur.Size = new Size(100, 21);
+            lbAdresseEditeur.Size = new Size(61, 20);
             lbAdresseEditeur.TabIndex = 18;
             lbAdresseEditeur.Text = "Adresse";
             // 
@@ -115,17 +120,19 @@
             // 
             txtAdresse.BackColor = Color.White;
             txtAdresse.BorderStyle = BorderStyle.FixedSingle;
-            txtAdresse.Location = new Point(959, 150);
+            txtAdresse.Location = new Point(726, 26);
+            txtAdresse.Margin = new Padding(2, 3, 2, 3);
             txtAdresse.Name = "txtAdresse";
-            txtAdresse.Size = new Size(340, 29);
+            txtAdresse.Size = new Size(284, 27);
             txtAdresse.TabIndex = 17;
             // 
             // lbNomEditeur
             // 
             lbNomEditeur.AutoSize = true;
-            lbNomEditeur.Location = new Point(462, 158);
+            lbNomEditeur.Location = new Point(256, 28);
+            lbNomEditeur.Margin = new Padding(2, 0, 2, 0);
             lbNomEditeur.Name = "lbNomEditeur";
-            lbNomEditeur.Size = new Size(57, 21);
+            lbNomEditeur.Size = new Size(42, 20);
             lbNomEditeur.TabIndex = 16;
             lbNomEditeur.Text = "Nom";
             // 
@@ -133,17 +140,19 @@
             // 
             txtNomEditeur.BackColor = Color.White;
             txtNomEditeur.BorderStyle = BorderStyle.FixedSingle;
-            txtNomEditeur.Location = new Point(534, 156);
+            txtNomEditeur.Location = new Point(348, 27);
+            txtNomEditeur.Margin = new Padding(2, 3, 2, 3);
             txtNomEditeur.Name = "txtNomEditeur";
-            txtNomEditeur.Size = new Size(271, 29);
+            txtNomEditeur.Size = new Size(219, 27);
             txtNomEditeur.TabIndex = 15;
             // 
             // lbMail
             // 
             lbMail.AutoSize = true;
-            lbMail.Location = new Point(873, 226);
+            lbMail.Location = new Point(622, 86);
+            lbMail.Margin = new Padding(2, 0, 2, 0);
             lbMail.Name = "lbMail";
-            lbMail.Size = new Size(71, 21);
+            lbMail.Size = new Size(52, 20);
             lbMail.TabIndex = 26;
             lbMail.Text = "E-mail";
             // 
@@ -151,17 +160,19 @@
             // 
             txtMail.BackColor = Color.White;
             txtMail.BorderStyle = BorderStyle.FixedSingle;
-            txtMail.Location = new Point(959, 224);
+            txtMail.Location = new Point(726, 84);
+            txtMail.Margin = new Padding(2, 3, 2, 3);
             txtMail.Name = "txtMail";
-            txtMail.Size = new Size(340, 29);
+            txtMail.Size = new Size(284, 27);
             txtMail.TabIndex = 25;
             // 
             // lbTelephone
             // 
             lbTelephone.AutoSize = true;
-            lbTelephone.Location = new Point(394, 226);
+            lbTelephone.Location = new Point(220, 87);
+            lbTelephone.Margin = new Padding(2, 0, 2, 0);
             lbTelephone.Name = "lbTelephone";
-            lbTelephone.Size = new Size(125, 21);
+            lbTelephone.Size = new Size(78, 20);
             lbTelephone.TabIndex = 24;
             lbTelephone.Text = "Téléphone";
             // 
@@ -169,16 +180,15 @@
             // 
             txtTelephone.BackColor = Color.White;
             txtTelephone.BorderStyle = BorderStyle.FixedSingle;
-            txtTelephone.Location = new Point(534, 224);
+            txtTelephone.Location = new Point(348, 85);
+            txtTelephone.Margin = new Padding(2, 3, 2, 3);
             txtTelephone.Name = "txtTelephone";
-            txtTelephone.Size = new Size(271, 29);
+            txtTelephone.Size = new Size(219, 27);
             txtTelephone.TabIndex = 23;
             // 
-            // Editeurs
+            // EditeursUserControl
             // 
-            AutoScaleDimensions = new SizeF(14F, 21F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1567, 903);
+            AutoScaleMode = AutoScaleMode.None;
             Controls.Add(lbMail);
             Controls.Add(txtMail);
             Controls.Add(lbTelephone);
@@ -191,19 +201,9 @@
             Controls.Add(txtAdresse);
             Controls.Add(lbNomEditeur);
             Controls.Add(txtNomEditeur);
-            Name = "Editeurs";
-            Controls.SetChildIndex(txtNomEditeur, 0);
-            Controls.SetChildIndex(lbNomEditeur, 0);
-            Controls.SetChildIndex(txtAdresse, 0);
-            Controls.SetChildIndex(lbAdresseEditeur, 0);
-            Controls.SetChildIndex(btCreer, 0);
-            Controls.SetChildIndex(btModifier, 0);
-            Controls.SetChildIndex(btSupprimer, 0);
-            Controls.SetChildIndex(dataGridView1, 0);
-            Controls.SetChildIndex(txtTelephone, 0);
-            Controls.SetChildIndex(lbTelephone, 0);
-            Controls.SetChildIndex(txtMail, 0);
-            Controls.SetChildIndex(lbMail, 0);
+            Margin = new Padding(2, 3, 2, 3);
+            Name = "EditeursUserControl";
+            Size = new Size(1204, 558);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
