@@ -75,25 +75,27 @@
             txtTitre.Location = new Point(124, 31);
             txtTitre.Name = "txtTitre";
             txtTitre.Size = new Size(271, 27);
-            txtTitre.TabIndex = 11;
+            txtTitre.TabIndex = 1;
             // 
             // comboBoxAuteur
             // 
+            comboBoxAuteur.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxAuteur.Font = new Font("Copperplate Gothic Light", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxAuteur.FormattingEnabled = true;
             comboBoxAuteur.Location = new Point(547, 32);
             comboBoxAuteur.Name = "comboBoxAuteur";
             comboBoxAuteur.Size = new Size(271, 28);
-            comboBoxAuteur.TabIndex = 15;
+            comboBoxAuteur.TabIndex = 2;
             // 
             // comboBoxEditeur
             // 
+            comboBoxEditeur.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxEditeur.Font = new Font("Copperplate Gothic Light", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxEditeur.FormattingEnabled = true;
             comboBoxEditeur.Location = new Point(124, 89);
             comboBoxEditeur.Name = "comboBoxEditeur";
             comboBoxEditeur.Size = new Size(271, 28);
-            comboBoxEditeur.TabIndex = 17;
+            comboBoxEditeur.TabIndex = 3;
             // 
             // lbEditeur
             // 
@@ -123,16 +125,17 @@
             txtIsbn.Location = new Point(547, 91);
             txtIsbn.Name = "txtIsbn";
             txtIsbn.Size = new Size(271, 27);
-            txtIsbn.TabIndex = 18;
+            txtIsbn.TabIndex = 4;
             // 
             // comboBoxType
             // 
+            comboBoxType.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxType.Font = new Font("Copperplate Gothic Light", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxType.FormattingEnabled = true;
             comboBoxType.Location = new Point(123, 153);
             comboBoxType.Name = "comboBoxType";
             comboBoxType.Size = new Size(271, 28);
-            comboBoxType.TabIndex = 21;
+            comboBoxType.TabIndex = 5;
             // 
             // lbType
             // 
@@ -162,7 +165,7 @@
             txtPrix.Location = new Point(492, 151);
             txtPrix.Name = "txtPrix";
             txtPrix.Size = new Size(109, 27);
-            txtPrix.TabIndex = 22;
+            txtPrix.TabIndex = 6;
             txtPrix.TextChanged += txtBox_TextChanged;
             // 
             // lbQuantite
@@ -183,7 +186,7 @@
             txtQuantite.Location = new Point(738, 154);
             txtQuantite.Name = "txtQuantite";
             txtQuantite.Size = new Size(109, 27);
-            txtQuantite.TabIndex = 24;
+            txtQuantite.TabIndex = 7;
             // 
             // btModifier
             // 
@@ -193,7 +196,7 @@
             btModifier.Location = new Point(344, 209);
             btModifier.Name = "btModifier";
             btModifier.Size = new Size(181, 49);
-            btModifier.TabIndex = 27;
+            btModifier.TabIndex = 8;
             btModifier.Text = "Modifier";
             btModifier.UseVisualStyleBackColor = false;
             btModifier.Click += btModifier_Click;
@@ -206,7 +209,7 @@
             btCreer.Location = new Point(344, 209);
             btCreer.Name = "btCreer";
             btCreer.Size = new Size(181, 49);
-            btCreer.TabIndex = 26;
+            btCreer.TabIndex = 8;
             btCreer.Text = "Créer";
             btCreer.UseVisualStyleBackColor = false;
             btCreer.Click += btCreer_Click;

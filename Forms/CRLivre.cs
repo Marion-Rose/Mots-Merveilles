@@ -127,33 +127,42 @@ namespace Mots_Merveilles.Forms
                 && ControleEntree.VerifierIsbn(txtIsbn.Text) && ControleEntree.VerifierTextePrix(txtPrix.Text) && ControleEntree.VerifierTexteQuantite(txtQuantite.Text))
             {
                 // Vérifie si le livre existe déjà
-                if(!livreManager.LivreExiste(txtIsbn.Text))
+                if (!livreManager.LivreExiste(txtIsbn.Text))
                 {
                     //Verifie si le livre est associé à une commande
                     // if (!livreManager.CommandeAssocie())
                     // {
-                        try
-                        {
-                            Livre nouveauLivre = new Livre(0, txtTitre.Text, (Auteur)comboBoxAuteur.SelectedItem, (Editeur)comboBoxEditeur.SelectedItem, txtIsbn.Text, (TypeLivre)comboBoxType.SelectedItem, Convert.ToDecimal(txtPrix.Text), Convert.ToInt32(txtQuantite.Text));
-                            int nbRows = livreManager.CreerLivre(nouveauLivre);
-                            
-                            if (nbRows > 0)
-                            {
-                                MessageBox.Show("Le livre a bien été ajouté", "Création réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                this.Close();
-                            }
-                            else
-                            { MessageBox.Show("Erreur lors de la création du livre : Aucune ligne n'a été insérée", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);}
+                    try
+                    {
+                        Livre nouveauLivre = new Livre(0, txtTitre.Text, (Auteur)comboBoxAuteur.SelectedItem, (Editeur)comboBoxEditeur.SelectedItem, txtIsbn.Text, (TypeLivre)comboBoxType.SelectedItem, Convert.ToDecimal(txtPrix.Text), Convert.ToInt32(txtQuantite.Text));
+                        int nbRows = livreManager.CreerLivre(nouveauLivre);
 
+                        if (nbRows > 0)
+                        {
+                            MessageBox.Show("Le livre a bien été ajouté", "Création réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.Close();
                         }
-                        catch (Exception ex) { MessageBox.Show("Erreur lors de la création du livre : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);}
+                        else
+                        { MessageBox.Show("Erreur lors de la création du livre : Aucune ligne n'a été insérée", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+
+                    }
+                    catch (Exception ex) { MessageBox.Show("Erreur lors de la création du livre : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
                     // }
                     // else { MessageBox.Show("Le livre est associé à une commande, il ne peut pas être supprimé", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
                 }
                 else { MessageBox.Show("Il existe déjà un livre avec le même ISBN.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             }
             else
-            { MessageBox.Show("Veuillez remplir tous les champs sous la forme attendue", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);}
+            {
+                if (txtTitre.Text == "") { MessageBox.Show("Veuillez remplir le champ Titre", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                if (txtIsbn.Text == "") { MessageBox.Show("Veuillez remplir le champ ISBN", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                if (txtPrix.Text == "") { MessageBox.Show("Veuillez remplir le champ Prix", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                if (txtQuantite.Text == "") { MessageBox.Show("Veuillez remplir le champ Quantité", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                if (!ControleEntree.VerifierIsbn(txtIsbn.Text)) { MessageBox.Show("L'ISBN doit être composé de 13 chiffres", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                if (!ControleEntree.VerifierTextePrix(txtPrix.Text)) { MessageBox.Show("Le prix doit être un nombre décimal", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                if (!ControleEntree.VerifierTexteQuantite(txtQuantite.Text)) { MessageBox.Show("La quantité doit être un nombre entier", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            }
+
         }
 
         /// <summary>
@@ -189,7 +198,15 @@ namespace Mots_Merveilles.Forms
                 catch (Exception ex) { MessageBox.Show("Erreur lors de la modification du livre : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);}
             }
             else
-            { MessageBox.Show("Veuillez remplir tous les champs sous la forme attendue", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);}
+            {
+                if (txtTitre.Text == "") { MessageBox.Show("Veuillez remplir le champ Titre", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                if (txtIsbn.Text == "") { MessageBox.Show("Veuillez remplir le champ ISBN", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                if (txtPrix.Text == "") { MessageBox.Show("Veuillez remplir le champ Prix", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                if (txtQuantite.Text == "") { MessageBox.Show("Veuillez remplir le champ Quantité", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                if (!ControleEntree.VerifierIsbn(txtIsbn.Text)) { MessageBox.Show("L'ISBN doit être composé de 13 chiffres", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                if (!ControleEntree.VerifierTextePrix(txtPrix.Text)) { MessageBox.Show("Le prix doit être un nombre décimal", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                if (!ControleEntree.VerifierTexteQuantite(txtQuantite.Text)) { MessageBox.Show("La quantité doit être un nombre entier", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            }
         }
     }
 }

@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             dataGridView1 = new DataGridView();
             btSupprimer = new Button();
             btModifier = new Button();
@@ -46,20 +48,35 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridViewCellStyle1.BackColor = Color.FloralWhite;
+            dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.BackgroundColor = SystemColors.Control;
             dataGridView1.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = Color.Transparent;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.Tan;
+            dataGridViewCellStyle2.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = Color.Transparent;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Window;
+            dataGridViewCellStyle3.Font = new Font("Copperplate Gothic Light", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = Color.Tan;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.Location = new Point(54, 222);
             dataGridView1.Margin = new Padding(2, 3, 2, 3);
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
+            dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.RowTemplate.Height = 29;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -75,7 +92,7 @@
             btSupprimer.Margin = new Padding(2, 3, 2, 3);
             btSupprimer.Name = "btSupprimer";
             btSupprimer.Size = new Size(155, 32);
-            btSupprimer.TabIndex = 21;
+            btSupprimer.TabIndex = 7;
             btSupprimer.Text = "Supprimer";
             btSupprimer.UseVisualStyleBackColor = false;
             btSupprimer.Click += btSupprimer_Click;
@@ -88,7 +105,7 @@
             btModifier.Margin = new Padding(2, 3, 2, 3);
             btModifier.Name = "btModifier";
             btModifier.Size = new Size(155, 32);
-            btModifier.TabIndex = 20;
+            btModifier.TabIndex = 6;
             btModifier.Text = "Modifier";
             btModifier.UseVisualStyleBackColor = false;
             btModifier.Click += btModifier_Click;
@@ -101,7 +118,7 @@
             btCreer.Margin = new Padding(2, 3, 2, 3);
             btCreer.Name = "btCreer";
             btCreer.Size = new Size(155, 32);
-            btCreer.TabIndex = 19;
+            btCreer.TabIndex = 5;
             btCreer.Text = "Créer";
             btCreer.UseVisualStyleBackColor = false;
             btCreer.Click += btCreer_Click;
@@ -124,8 +141,7 @@
             txtAdresse.Margin = new Padding(2, 3, 2, 3);
             txtAdresse.Name = "txtAdresse";
             txtAdresse.Size = new Size(284, 27);
-            txtAdresse.TabIndex = 17;
-            txtAdresse.TextChanged += txtBox_TextChanged;
+            txtAdresse.TabIndex = 2;
             // 
             // lbNomEditeur
             // 
@@ -145,8 +161,7 @@
             txtNomEditeur.Margin = new Padding(2, 3, 2, 3);
             txtNomEditeur.Name = "txtNomEditeur";
             txtNomEditeur.Size = new Size(219, 27);
-            txtNomEditeur.TabIndex = 15;
-            txtNomEditeur.TextChanged += txtBox_TextChanged;
+            txtNomEditeur.TabIndex = 1;
             // 
             // lbMail
             // 
@@ -162,12 +177,12 @@
             // 
             txtMail.BackColor = Color.White;
             txtMail.BorderStyle = BorderStyle.FixedSingle;
+            txtMail.CharacterCasing = CharacterCasing.Lower;
             txtMail.Location = new Point(726, 84);
             txtMail.Margin = new Padding(2, 3, 2, 3);
             txtMail.Name = "txtMail";
             txtMail.Size = new Size(284, 27);
-            txtMail.TabIndex = 25;
-            txtMail.TextChanged += txtBox_TextChanged;
+            txtMail.TabIndex = 4;
             // 
             // lbTelephone
             // 
@@ -187,8 +202,7 @@
             txtTelephone.Margin = new Padding(2, 3, 2, 3);
             txtTelephone.Name = "txtTelephone";
             txtTelephone.Size = new Size(219, 27);
-            txtTelephone.TabIndex = 23;
-            txtTelephone.TextChanged += txtBox_TextChanged;
+            txtTelephone.TabIndex = 3;
             // 
             // EditeursUserControl
             // 

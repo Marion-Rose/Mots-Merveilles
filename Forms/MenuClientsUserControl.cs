@@ -78,7 +78,7 @@ namespace Mots_Merveilles.Forms
         {
             CRClient Obj = new CRClient(true);
             Obj.ShowDialog();
-            this.Show();
+            //Obj.Show();
             AfficherClients();
         }
 
@@ -93,7 +93,7 @@ namespace Mots_Merveilles.Forms
             {
                 CRClient Obj = new CRClient(false, Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value));
                 Obj.ShowDialog();
-                this.Show();
+                //Obj.Show();
                 AfficherClients();
             }
             else

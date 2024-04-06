@@ -71,21 +71,6 @@ namespace Mots_Merveilles.Forms
             }
         }
 
-        /// <summary>
-        /// Gestion de la modification du texte dans les textBox
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txtBox_TextChanged(object sender, EventArgs e)
-        {
-            TextBox textBox = (TextBox)sender;
-            string text = textBox.Text;
-            if (textBox.Name == "txtMail")
-            {
-                textBox.Text = ControleEntree.FormaterTexteMail(text);
-                textBox.SelectionStart = text.Length;
-            }
-        }
 
         /// <summary>
         /// Affichage des editeurs dans le dataGridView
@@ -107,13 +92,6 @@ namespace Mots_Merveilles.Forms
             {
                 dataGridView1.Rows.Add(editeur.GetIdEditeur(), editeur.GetNom(), editeur.GetAdresse(), editeur.GetTelephone(), editeur.GetEmail());
             }
-
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;// Ajustez la largeur des colonnes pour remplir la grille
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;//Sélectionnez toute la ligne au lieu d'une cellule
-            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Tan;// Changez la couleur des en-têtes de colonnes
-            dataGridView1.EnableHeadersVisualStyles = false;//Annule le style par défaut des en-têtes de colonnes
-            dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.FloralWhite;// Changez la couleur des lignes alternatives
-            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Tan;// Changez la couleur de fond de la ligne sélectionnée
         }
 
         /// <summary>
@@ -125,7 +103,7 @@ namespace Mots_Merveilles.Forms
         {
             //Verifie les champs
             if (txtNomEditeur.Text != "" && txtAdresse.Text != "" && txtTelephone.Text != "" && txtMail.Text != "" 
-                && !ControleEntree.VerifierTexteNom(txtNomEditeur.Text) && !ControleEntree.VerifierTexteMail(txtMail.Text) && !ControleEntree.VerifierTexteTelephone(txtTelephone.Text))
+                && ControleEntree.VerifierTexteNom(txtNomEditeur.Text) && ControleEntree.VerifierTexteMail(txtMail.Text) && ControleEntree.VerifierTexteTelephone(txtTelephone.Text))
             {
                 //Verifie si l'editeur existe
                 if (!editeurManager.EditeurExiste(txtNomEditeur.Text))
@@ -164,7 +142,7 @@ namespace Mots_Merveilles.Forms
         {
             //Verifie les champs
             if (txtNomEditeur.Text != "" && txtAdresse.Text != "" && txtTelephone.Text != "" && txtMail.Text != ""
-                && !ControleEntree.VerifierTexteNom(txtNomEditeur.Text) && !ControleEntree.VerifierTexteMail(txtMail.Text) && !ControleEntree.VerifierTexteTelephone(txtTelephone.Text))
+                && ControleEntree.VerifierTexteNom(txtNomEditeur.Text) && ControleEntree.VerifierTexteMail(txtMail.Text) && ControleEntree.VerifierTexteTelephone(txtTelephone.Text))
             {
                 try
                 {

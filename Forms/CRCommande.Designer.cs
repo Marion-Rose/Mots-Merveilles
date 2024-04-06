@@ -56,7 +56,7 @@
             btModifier.Location = new Point(360, 419);
             btModifier.Name = "btModifier";
             btModifier.Size = new Size(181, 49);
-            btModifier.TabIndex = 43;
+            btModifier.TabIndex = 8;
             btModifier.Text = "Modifier";
             btModifier.UseVisualStyleBackColor = false;
             btModifier.Click += btModifier_Click;
@@ -96,12 +96,13 @@
             // 
             // comboBoxEditeur
             // 
+            comboBoxEditeur.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxEditeur.Font = new Font("Copperplate Gothic Light", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxEditeur.FormattingEnabled = true;
             comboBoxEditeur.Location = new Point(548, 35);
             comboBoxEditeur.Name = "comboBoxEditeur";
             comboBoxEditeur.Size = new Size(271, 28);
-            comboBoxEditeur.TabIndex = 31;
+            comboBoxEditeur.TabIndex = 2;
             comboBoxEditeur.SelectedIndexChanged += comboBoxEditeur_SelectedIndexChanged;
             // 
             // lbEditeur
@@ -132,7 +133,7 @@
             txtNumero.Location = new Point(125, 34);
             txtNumero.Name = "txtNumero";
             txtNumero.Size = new Size(271, 27);
-            txtNumero.TabIndex = 28;
+            txtNumero.TabIndex = 1;
             // 
             // dateTimePicker1
             // 
@@ -140,17 +141,18 @@
             dateTimePicker1.Location = new Point(125, 86);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(271, 27);
-            dateTimePicker1.TabIndex = 44;
+            dateTimePicker1.TabIndex = 3;
             // 
             // comboBoxStatut
             // 
+            comboBoxStatut.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxStatut.Font = new Font("Copperplate Gothic Light", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxStatut.FormattingEnabled = true;
             comboBoxStatut.Items.AddRange(new object[] { "En attente", "En cours", "Effectuée", "Payée", "Réceptionnée", "Clôturée" });
             comboBoxStatut.Location = new Point(548, 88);
             comboBoxStatut.Name = "comboBoxStatut";
             comboBoxStatut.Size = new Size(271, 28);
-            comboBoxStatut.TabIndex = 45;
+            comboBoxStatut.TabIndex = 4;
             // 
             // lbLivres
             // 
@@ -174,20 +176,21 @@
             // 
             // comboBoxLivre
             // 
+            comboBoxLivre.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxLivre.Font = new Font("Copperplate Gothic Light", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxLivre.FormattingEnabled = true;
             comboBoxLivre.Items.AddRange(new object[] { "En attente", "En cours", "Effectuée", "Payée", "Réceptionnée", "Clôturée" });
             comboBoxLivre.Location = new Point(50, 216);
             comboBoxLivre.Name = "comboBoxLivre";
             comboBoxLivre.Size = new Size(363, 28);
-            comboBoxLivre.TabIndex = 48;
+            comboBoxLivre.TabIndex = 5;
             // 
             // numUpDown
             // 
             numUpDown.Location = new Point(477, 216);
             numUpDown.Name = "numUpDown";
             numUpDown.Size = new Size(62, 27);
-            numUpDown.TabIndex = 49;
+            numUpDown.TabIndex = 6;
             // 
             // dataGridView1
             // 
@@ -213,7 +216,7 @@
             btnAjouter.Location = new Point(621, 203);
             btnAjouter.Name = "btnAjouter";
             btnAjouter.Size = new Size(143, 40);
-            btnAjouter.TabIndex = 51;
+            btnAjouter.TabIndex = 7;
             btnAjouter.Text = "Ajouter";
             btnAjouter.UseVisualStyleBackColor = false;
             btnAjouter.Click += btnAjouter_Click;

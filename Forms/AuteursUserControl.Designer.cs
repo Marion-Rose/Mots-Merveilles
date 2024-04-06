@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             txtNomAuteur = new TextBox();
             lbNomAuteur = new Label();
             lbPrenomAuteur = new Label();
@@ -48,7 +50,7 @@
             txtNomAuteur.Margin = new Padding(2, 3, 2, 3);
             txtNomAuteur.Name = "txtNomAuteur";
             txtNomAuteur.Size = new Size(186, 27);
-            txtNomAuteur.TabIndex = 7;
+            txtNomAuteur.TabIndex = 1;
             txtNomAuteur.TextChanged += txtBox_TextChanged;
             // 
             // lbNomAuteur
@@ -79,7 +81,7 @@
             txtPrenomAuteur.Margin = new Padding(2, 3, 2, 3);
             txtPrenomAuteur.Name = "txtPrenomAuteur";
             txtPrenomAuteur.Size = new Size(181, 27);
-            txtPrenomAuteur.TabIndex = 9;
+            txtPrenomAuteur.TabIndex = 2;
             txtPrenomAuteur.TextChanged += txtBox_TextChanged;
             // 
             // btSupprimer
@@ -91,7 +93,7 @@
             btSupprimer.Margin = new Padding(2, 3, 2, 3);
             btSupprimer.Name = "btSupprimer";
             btSupprimer.Size = new Size(155, 32);
-            btSupprimer.TabIndex = 13;
+            btSupprimer.TabIndex = 5;
             btSupprimer.Text = "Supprimer";
             btSupprimer.UseVisualStyleBackColor = false;
             btSupprimer.Click += btSupprimer_Click;
@@ -104,7 +106,7 @@
             btModifier.Margin = new Padding(2, 3, 2, 3);
             btModifier.Name = "btModifier";
             btModifier.Size = new Size(155, 32);
-            btModifier.TabIndex = 12;
+            btModifier.TabIndex = 4;
             btModifier.Text = "Modifier";
             btModifier.UseVisualStyleBackColor = false;
             btModifier.Click += btModifier_Click;
@@ -117,31 +119,46 @@
             btCreer.Margin = new Padding(2, 3, 2, 3);
             btCreer.Name = "btCreer";
             btCreer.Size = new Size(155, 32);
-            btCreer.TabIndex = 11;
+            btCreer.TabIndex = 3;
             btCreer.Text = "Créer";
             btCreer.UseVisualStyleBackColor = false;
             btCreer.Click += btCreer_Click;
             // 
             // dataGridView1
             // 
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridViewCellStyle1.BackColor = Color.FloralWhite;
+            dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.BackgroundColor = SystemColors.Control;
             dataGridView1.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = Color.Transparent;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.Tan;
+            dataGridViewCellStyle2.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = Color.Transparent;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(167, 178);
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Window;
+            dataGridViewCellStyle3.Font = new Font("Copperplate Gothic Light", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = Color.Tan;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridView1.EnableHeadersVisualStyles = false;
+            dataGridView1.Location = new Point(50, 185);
             dataGridView1.Margin = new Padding(2, 3, 2, 3);
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
+            dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.RowTemplate.Height = 29;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(887, 365);
+            dataGridView1.Size = new Size(1098, 357);
             dataGridView1.TabIndex = 23;
             // 
             // AuteursUserControl
