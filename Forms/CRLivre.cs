@@ -1,4 +1,5 @@
-﻿using Mots_Merveilles.Managers;
+﻿using Mots_Merveilles.Classes;
+using Mots_Merveilles.Managers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,19 +13,40 @@ using System.Windows.Forms;
 
 namespace Mots_Merveilles.Forms
 {
+    /// <summary>
+    /// Formulaire de création et de modification de livre
+    /// </summary>
     public partial class CRLivre : Form
     {
-        ConnexionManager connexion;
-        private int idLivreToModify;
+        private LivreManager livreManager;
+        private int idLivre;
+        private bool param;
+
+        /// <summary>
+        /// Constructeur de la classe CRLivre
+        /// </summary>
+        /// <param name="param">Indique le mode création ou modififation</param>
+        /// <param name="idLivre">Indique l'id du livre à modifier (facultatif)</param>
         public CRLivre(bool param, int? idLivre = null)
         {
             InitializeComponent();
-            connexion = new ConnexionManager();
+            this.livreManager = new LivreManager();
+            this.param = param;
+            if (idLivre != null) { this.idLivre = (int)idLivre; }
+            this.Load += CRLivre_Load;
+        }
+
+        /// <summary>
+        /// Chargement du formulaire
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CRLivre_Load(object sender, EventArgs e)
+        {
             ChargerComboBox();
-            if (idLivre != null) { this.idLivreToModify = (int)idLivre; }
 
             // Si param est true, bouton créer est visible, sinon bouton modifier est visible
-            if (param)
+            if (this.param)
             {
                 btModifier.Hide();
             }
@@ -33,137 +55,141 @@ namespace Mots_Merveilles.Forms
                 PreremplirChamps();
                 btCreer.Hide();
             }
-
         }
 
+        /// <summary>
+        /// Gestion de la modification du texte dans les textBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtBox_TextChanged(object sender, EventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            string text = textBox.Text;
+            // Mise en forme de la première lettre en majuscule et le reste en minuscule
+            textBox.Text = ControleEntree.FormaterTextePrix(text);
+            textBox.SelectionStart = text.Length;
+        }
+
+        /// <summary>
+        /// Préremplie les champs du formulaire en cas de modification
+        /// </summary>
         private void PreremplirChamps()
         {
             try
             {
-                string query = "SELECT l.ID_livre, l.titre, CONCAT(a.nom, ' ', a.prenom) AS auteur, e.nom AS editeur, l.ISBN, t.type AS type, l.prix, l.quantite " +
-                "FROM Livre l " +
-                "INNER JOIN Auteur a ON l.ID_auteur = a.ID_auteur " +
-                "INNER JOIN Editeur e ON l.ID_editeur = e.ID_editeur " +
-                "INNER JOIN TypeLivre t ON l.ID_type = t.ID_type " +
-                "WHERE l.ID_livre = " + this.idLivreToModify + "; ";
-                DataTable DataSource = connexion.RecupererDonnees(query);
-                txtTitre.Text = DataSource.Rows[0]["titre"].ToString();
-                comboBoxAuteur.Text = DataSource.Rows[0]["auteur"].ToString();
-                comboBoxEditeur.Text = DataSource.Rows[0]["editeur"].ToString();
-                comboBoxType.Text = DataSource.Rows[0]["type"].ToString();
-                txtIsbn.Text = DataSource.Rows[0]["ISBN"].ToString();
-                txtPrix.Text = DataSource.Rows[0]["prix"].ToString();
-                txtQuantite.Text = DataSource.Rows[0]["quantite"].ToString();
+                Livre livreAModifier = livreManager.AfficherLivre(this.idLivre);
+                txtTitre.Text = livreAModifier.GetTitre();
+                comboBoxAuteur.Text = livreAModifier.GetAuteur().ToString();
+                comboBoxEditeur.Text = livreAModifier.GetEditeur().GetNom();
+                comboBoxType.Text = livreAModifier.GetType().GetLibelle();
+                txtIsbn.Text = livreAModifier.GetIsbn();
+                txtPrix.Text = livreAModifier.GetPrix().ToString("0.00");
+                txtQuantite.Text = livreAModifier.GetQuantite().ToString();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Erreur lors de la récupération des données : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        /// <summary>
+        /// Remplit les ComboBox avec les données de la base de données
+        /// </summary>
         private void ChargerComboBox()
         {
             // Assigner les données de la BD aux ComboBox
-            string queryAuteur = "SELECT CONCAT(a.nom, ' ', a.prenom) AS Auteur, a.ID_auteur FROM Auteur a;";
-            DataTable dataAuteur = connexion.RecupererDonnees(queryAuteur);
-            comboBoxAuteur.DataSource = dataAuteur;
+            AuteurManager auteurManager = new AuteurManager();
+            List<Auteur> listeAuteurs = auteurManager.RecupererListeAuteur();
+            comboBoxAuteur.DataSource = listeAuteurs;
             comboBoxAuteur.DisplayMember = "Auteur";
 
-            string queryEditeur = "SELECT e.nom AS Editeur, e.ID_editeur FROM Editeur e;";
-            DataTable dataEditeur = connexion.RecupererDonnees(queryEditeur);
-            comboBoxEditeur.DataSource = dataEditeur;
+            EditeurManager editeurManager = new EditeurManager();
+            List<Editeur> listeEditeurs = editeurManager.RecupererListeEditeur();
+            comboBoxEditeur.DataSource = listeEditeurs;
             comboBoxEditeur.DisplayMember = "Editeur";
 
-            string queryType = "SELECT t.type AS Type, t.ID_type FROM TypeLivre t;";
-            DataTable dataType = connexion.RecupererDonnees(queryType);
-            comboBoxType.DataSource = dataType;
+            TypeLivreManager typeLivreManager = new TypeLivreManager();
+            List<TypeLivre> listeTypes = typeLivreManager.RecupererListeTypeLivre();
+            comboBoxType.DataSource = listeTypes;
             comboBoxType.DisplayMember = "Type";
         }
 
+        /// <summary>
+        /// Gestion du bouton créer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btCreer_Click(object sender, EventArgs e)
         {
-            if (txtTitre.Text != "" && txtIsbn.Text != "" && txtPrix.Text != "" && txtQuantite.Text != "")
+            //Verifie la conformité des champs
+            if (txtTitre.Text != "" && txtIsbn.Text != "" && txtPrix.Text != "" && txtQuantite.Text != ""
+                && ControleEntree.VerifierIsbn(txtIsbn.Text) && ControleEntree.VerifierTextePrix(txtPrix.Text) && ControleEntree.VerifierTexteQuantite(txtQuantite.Text))
             {
-                try
+                // Vérifie si le livre existe déjà
+                if(!livreManager.LivreExiste(txtIsbn.Text))
                 {
-                    {
-                        comboBoxAuteur.ValueMember = "ID_auteur";
-                        comboBoxEditeur.ValueMember = "ID_editeur";
-                        comboBoxType.ValueMember = "ID_type";
-                        int idAuteurSelectionne = (int)comboBoxAuteur.SelectedValue;
-                        int idEditeurSelectionne = (int)comboBoxEditeur.SelectedValue;
-                        int idTypeSelectionne = (int)comboBoxType.SelectedValue;
+                    //Verifie si le livre est associé à une commande
+                    // if (!livreManager.CommandeAssocie())
+                    // {
+                        try
+                        {
+                            Livre nouveauLivre = new Livre(0, txtTitre.Text, (Auteur)comboBoxAuteur.SelectedItem, (Editeur)comboBoxEditeur.SelectedItem, txtIsbn.Text, (TypeLivre)comboBoxType.SelectedItem, Convert.ToDecimal(txtPrix.Text), Convert.ToInt32(txtQuantite.Text));
+                            int nbRows = livreManager.CreerLivre(nouveauLivre);
+                            
+                            if (nbRows > 0)
+                            {
+                                MessageBox.Show("Le livre a bien été ajouté", "Création réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                this.Close();
+                            }
+                            else
+                            { MessageBox.Show("Erreur lors de la création du livre : Aucune ligne n'a été insérée", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);}
 
-                        string query = "INSERT INTO Livre (titre, ID_auteur, Id_editeur, ISBN, ID_type, prix, quantite) VALUES (@titre, @auteur, @editeur, @isbn, @type, @prix, @quantite)";
-
-                        // Définissez les paramètres
-                        SqlParameter[] parameters = {
-                            new SqlParameter("@titre", SqlDbType.VarChar) { Value = txtTitre.Text },
-                            new SqlParameter("@auteur", SqlDbType.VarChar) { Value = idAuteurSelectionne },
-                            new SqlParameter("@editeur", SqlDbType.VarChar) { Value = idEditeurSelectionne },
-                            new SqlParameter("@isbn", SqlDbType.VarChar) { Value = txtIsbn.Text },
-                            new SqlParameter("@type", SqlDbType.VarChar) { Value = idTypeSelectionne },
-                            new SqlParameter("@prix", SqlDbType.VarChar) { Value = txtPrix.Text },
-                            new SqlParameter("@quantite", SqlDbType.VarChar) { Value = txtQuantite.Text }
-                        };
-
-                        connexion.EnvoyerDonnees(query, parameters);
-                    }
-
-                    MessageBox.Show("Le livre a bien été ajouté", "Création réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Close();
+                        }
+                        catch (Exception ex) { MessageBox.Show("Erreur lors de la création du livre : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);}
+                    // }
+                    // else { MessageBox.Show("Le livre est associé à une commande, il ne peut pas être supprimé", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Erreur lors de la création du livre : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                else { MessageBox.Show("Il existe déjà un livre avec le même ISBN.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             }
             else
-            {
-                MessageBox.Show("Veuillez remplir tous les champs", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            { MessageBox.Show("Veuillez remplir tous les champs sous la forme attendue", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);}
         }
 
+        /// <summary>
+        /// Gestion du bouton modifier
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btModifier_Click(object sender, EventArgs e)
         {
-            if (txtTitre.Text != "" && txtIsbn.Text != "" && txtPrix.Text != "" && txtQuantite.Text != "")
+            if (txtTitre.Text != "" && txtIsbn.Text != "" && txtPrix.Text != "" && txtQuantite.Text != ""
+                && ControleEntree.VerifierIsbn(txtIsbn.Text) && ControleEntree.VerifierTextePrix(txtPrix.Text) && ControleEntree.VerifierTexteQuantite(txtQuantite.Text))
             {
                 try
                 {
-                    comboBoxAuteur.ValueMember = "ID_auteur";
-                    comboBoxEditeur.ValueMember = "ID_editeur";
-                    comboBoxType.ValueMember = "ID_type";
-                    int idAuteurSelectionne = (int)comboBoxAuteur.SelectedValue;
-                    int idEditeurSelectionne = (int)comboBoxEditeur.SelectedValue;
-                    int idTypeSelectionne = (int)comboBoxType.SelectedValue;
+                    Livre livreAModifier = livreManager.AfficherLivre(this.idLivre);
+                    livreAModifier.SetTitre(txtTitre.Text);
+                    livreAModifier.SetAuteur((Auteur)comboBoxAuteur.SelectedItem);
+                    livreAModifier.SetEditeur((Editeur)comboBoxEditeur.SelectedItem);
+                    livreAModifier.SetIsbn(txtIsbn.Text);
+                    livreAModifier.SetType((TypeLivre)comboBoxType.SelectedItem);
+                    livreAModifier.SetPrix(Convert.ToDecimal(txtPrix.Text));
+                    livreAModifier.SetQuantite(Convert.ToInt32(txtQuantite.Text));
 
-                    string query = "UPDATE Livre SET titre=@titre, ID_auteur=@auteur, Id_editeur=@editeur, ISBN=@isbn, ID_type=@type, prix=@prix, quantite=@quantite WHERE ID_livre =@id;";
+                    int nbRows = livreManager.ModifierLivre(livreAModifier);
 
-                    // Définissez les paramètres
-                    SqlParameter[] parameters =
+                    if (nbRows > 0)
                     {
-                            new SqlParameter("@titre", SqlDbType.VarChar) { Value = txtTitre.Text },
-                            new SqlParameter("@auteur", SqlDbType.VarChar) { Value = idAuteurSelectionne },
-                            new SqlParameter("@editeur", SqlDbType.VarChar) { Value = idEditeurSelectionne },
-                            new SqlParameter("@isbn", SqlDbType.VarChar) { Value = txtIsbn.Text },
-                            new SqlParameter("@type", SqlDbType.VarChar) { Value = idTypeSelectionne },
-                            new SqlParameter("@prix", SqlDbType.VarChar) { Value = txtPrix.Text },
-                            new SqlParameter("@quantite", SqlDbType.VarChar) { Value = txtQuantite.Text },
-                            new SqlParameter("@id", SqlDbType.VarChar) { Value = this.idLivreToModify}
-                        };
-                    connexion.EnvoyerDonnees(query, parameters);
-
-                    MessageBox.Show("Le livre a bien été modifié.", "Modification réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Close();
+                        MessageBox.Show("Le livre a bien été modifié.", "Modification réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Close();
+                    }
+                    else { MessageBox.Show("Erreur lors de la modification du livre : Aucune ligne n'a été modifiée", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Erreur lors de la modification du livre : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                catch (Exception ex) { MessageBox.Show("Erreur lors de la modification du livre : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);}
             }
             else
-            {
-                MessageBox.Show("Veuillez remplir tous les champs", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            { MessageBox.Show("Veuillez remplir tous les champs sous la forme attendue", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);}
         }
     }
 }

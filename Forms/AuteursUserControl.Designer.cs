@@ -49,6 +49,7 @@
             txtNomAuteur.Name = "txtNomAuteur";
             txtNomAuteur.Size = new Size(186, 27);
             txtNomAuteur.TabIndex = 7;
+            txtNomAuteur.TextChanged += txtBox_TextChanged;
             // 
             // lbNomAuteur
             // 
@@ -59,7 +60,6 @@
             lbNomAuteur.Size = new Size(42, 20);
             lbNomAuteur.TabIndex = 8;
             lbNomAuteur.Text = "Nom";
-            lbNomAuteur.Click += label2_Click;
             // 
             // lbPrenomAuteur
             // 
@@ -80,6 +80,7 @@
             txtPrenomAuteur.Name = "txtPrenomAuteur";
             txtPrenomAuteur.Size = new Size(181, 27);
             txtPrenomAuteur.TabIndex = 9;
+            txtPrenomAuteur.TextChanged += txtBox_TextChanged;
             // 
             // btSupprimer
             // 

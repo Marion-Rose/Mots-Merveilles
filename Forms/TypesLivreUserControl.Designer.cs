@@ -87,7 +87,6 @@
             lbType.Size = new Size(40, 20);
             lbType.TabIndex = 16;
             lbType.Text = "Type";
-            lbType.Click += lbNomAuteur_Click;
             // 
             // txtType
             // 
@@ -98,6 +97,7 @@
             txtType.Name = "txtType";
             txtType.Size = new Size(156, 27);
             txtType.TabIndex = 15;
+            txtType.TextChanged += txtBox_TextChanged;
             // 
             // dataGridView1
             // 

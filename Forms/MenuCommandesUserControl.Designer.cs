@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             btSupprimer = new Button();
             btModifier = new Button();
             btCreer = new Button();
-            dataGridView1 = new DataGridView();
             lbTitre = new Label();
+            dataGridView1 = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -48,6 +51,7 @@
             btSupprimer.TabIndex = 18;
             btSupprimer.Text = "Supprimer";
             btSupprimer.UseVisualStyleBackColor = false;
+            btSupprimer.Click += btSupprimer_Click;
             // 
             // btModifier
             // 
@@ -60,6 +64,7 @@
             btModifier.TabIndex = 17;
             btModifier.Text = "Modifier";
             btModifier.UseVisualStyleBackColor = false;
+            btModifier.Click += btModifier_Click;
             // 
             // btCreer
             // 
@@ -72,19 +77,7 @@
             btCreer.TabIndex = 16;
             btCreer.Text = "Créer";
             btCreer.UseVisualStyleBackColor = false;
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.BackgroundColor = SystemColors.Control;
-            dataGridView1.BorderStyle = BorderStyle.None;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(210, 122);
-            dataGridView1.Margin = new Padding(2, 3, 2, 3);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.RowTemplate.Height = 29;
-            dataGridView1.Size = new Size(1223, 538);
-            dataGridView1.TabIndex = 19;
+            btCreer.Click += btCreer_Click;
             // 
             // lbTitre
             // 
@@ -97,14 +90,47 @@
             lbTitre.Size = new Size(334, 30);
             lbTitre.TabIndex = 20;
             lbTitre.Text = "Liste des Commandes";
-            lbTitre.Click += lbTitre_Click;
+            // 
+            // dataGridView1
+            // 
+            dataGridViewCellStyle1.BackColor = Color.FloralWhite;
+            dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridView1.BackgroundColor = SystemColors.Control;
+            dataGridView1.BorderStyle = BorderStyle.None;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = Color.Tan;
+            dataGridViewCellStyle2.Font = new Font("Copperplate Gothic Light", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = Color.Tan;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = SystemColors.Window;
+            dataGridViewCellStyle3.Font = new Font("Copperplate Gothic Light", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = Color.Tan;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridView1.EnableHeadersVisualStyles = false;
+            dataGridView1.Location = new Point(481, 93);
+            dataGridView1.Margin = new Padding(2, 3, 2, 3);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.RowTemplate.Height = 29;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.Size = new Size(656, 557);
+            dataGridView1.TabIndex = 21;
             // 
             // MenuCommandesUserControl
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = SystemColors.Control;
-            Controls.Add(lbTitre);
             Controls.Add(dataGridView1);
+            Controls.Add(lbTitre);
             Controls.Add(btSupprimer);
             Controls.Add(btModifier);
             Controls.Add(btCreer);
@@ -120,8 +146,8 @@
         private Button btSupprimer;
         private Button btModifier;
         private Button btCreer;
-        private DataGridView dataGridView1;
         private Label lbTitre;
         private DataGridView dataGridView2;
+        private DataGridView dataGridView1;
     }
 }

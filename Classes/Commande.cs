@@ -13,7 +13,7 @@ namespace Mots_Merveilles.Classes
     public class Commande
     {
         private int idCommande;
-        private int idEditeur;
+        private Editeur editeur;
         private DateTime dateCommande;
         private string statut;
         private Dictionary<Livre, int> livresCommandes;
@@ -22,14 +22,14 @@ namespace Mots_Merveilles.Classes
         /// Constructeur de la classe Commande
         /// </summary>
         /// <param name="idCommande"></param>
-        /// <param name="idEditeur"></param>
+        /// <param name="Editeur"></param>
         /// <param name="dateCommande"></param>
         /// <param name="statut"></param>
         /// <param name="livresCommandes"></param>
-        public Commande(int idCommande, int idEditeur, DateTime dateCommande, string statut, Dictionary<Livre, int> livresCommandes)
+        public Commande(int idCommande, Editeur editeur, DateTime dateCommande, string statut, Dictionary<Livre, int> livresCommandes)
         {
             this.idCommande = idCommande;
-            this.idEditeur = idEditeur;
+            this.editeur = editeur;
             this.dateCommande = dateCommande;
             this.statut = statut;
             this.livresCommandes = livresCommandes;
@@ -37,8 +37,8 @@ namespace Mots_Merveilles.Classes
 
         public void SetIdCommande(int idCommande) { this.idCommande = idCommande; }
         public int GetIdCommande() { return idCommande;}
-        public void SetIdEditeur(int idEditeur) { this.idEditeur = idEditeur;}
-        public int GetIdEditeur() { return idEditeur;}
+        public void SetEditeur(Editeur editeur) { this.editeur = editeur;}
+        public Editeur GetEditeur() { return editeur;}
         public void SetDateCommande(DateTime dateCommande) { this.dateCommande = dateCommande;}
         public DateTime GetDateCommande() { return dateCommande;}
         public void SetStatut(string statut) { this.statut = statut;}
@@ -47,13 +47,7 @@ namespace Mots_Merveilles.Classes
         public Dictionary<Livre, int> GetLivresCommandes() { return livresCommandes;}
         public override string ToString()
         {
-            return "Commande n°" + this.idCommande + " du " + this.dateCommande + " pour l'éditeur n°" + this.idEditeur + " - " + this.statut;
-        }
-
-        public string AfficherCommandes()
-        {
-            string query = "SELECT * FROM Commande";
-            return query;
+            return "Commande n°" + this.idCommande + " du " + this.dateCommande + " pour l'éditeur n°" + this.editeur.GetNom() + " - " + this.statut;
         }
 
     }

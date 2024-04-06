@@ -44,6 +44,7 @@ namespace Mots_Merveilles.Classes
             this.quantite = quantite;
         }
 
+
         public void SetIdLivre(int idLivre) { this.idLivre = idLivre; }
         public int GetIdLivre() { return this.idLivre;}
         public void SetTitre(string titre) { this.titre = titre;}

@@ -1,4 +1,5 @@
 ﻿using Mots_Merveilles.Managers;
+using Mots_Merveilles.Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,38 +8,52 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Mots_Merveilles.Forms
 {
-
+    /// <summary>
+    /// Contrôle utilisateur pour la gestion des types de livre
+    /// </summary>
     public partial class TypesLivreUserControl : UserControl
     {
-        ConnexionManager connexion;
+        private TypeLivreManager typeLivreManager;
+
+        /// <summary>
+        /// Constructeur de la classe TypesLivreUserControl
+        /// </summary>
         public TypesLivreUserControl()
         {
             InitializeComponent();
-            connexion = new ConnexionManager();
-#pragma warning disable CS8622 // La nullabilité des types référence dans le type du paramètre ne correspond pas au délégué cible (probablement en raison des attributs de nullabilité).
             this.Load += TypesLivre_Load;
-#pragma warning restore CS8622 // La nullabilité des types référence dans le type du paramètre ne correspond pas au délégué cible (probablement en raison des attributs de nullabilité).
+            this.typeLivreManager = new TypeLivreManager();
+        }
+
+        /// <summary>
+        /// Chargement du contrôle utilisateur
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TypesLivre_Load(object sender, EventArgs e)
+        {
+            dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
             AfficherTypes();
         }
 
-        private void TypesLivre_Load(object sender, EventArgs e)
-        {
-#pragma warning disable CS8622 // La nullabilité des types référence dans le type du paramètre ne correspond pas au délégué cible (probablement en raison des attributs de nullabilité).
-            dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
-#pragma warning restore CS8622 // La nullabilité des types référence dans le type du paramètre ne correspond pas au délégué cible (probablement en raison des attributs de nullabilité).
-        }
-
+        /// <summary>
+        /// Gestion de la sélection d'une ligne dans la grille
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 // Récupérez les valeurs de la ligne sélectionnée
-                txtType.Text = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+                int columnIndexType = dataGridView1.Columns["Type"].Index;
+                txtType.Text = dataGridView1.SelectedRows[0].Cells[columnIndexType].Value.ToString();
             }
             else
             {
@@ -47,10 +62,39 @@ namespace Mots_Merveilles.Forms
             }
         }
 
+        /// <summary>
+        /// Gestion de la modification du texte dans les textBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtBox_TextChanged(object sender, EventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            string text = textBox.Text;
+            textBox.Text = ControleEntree.FormaterTexteNom(text);
+            textBox.SelectionStart = text.Length;
+            
+        }
+
+        /// <summary>
+        /// Affiche les types de livre dans la grille
+        /// </summary>
         private void AfficherTypes()
         {
-            string query = "SELECT * FROM TypeLivre";
-            dataGridView1.DataSource = connexion.RecupererDonnees(query);
+            List<TypeLivre> listeTypeLivre = typeLivreManager.RecupererListeTypeLivre();
+            dataGridView1.Rows.Clear();
+
+            if (dataGridView1.Columns.Count == 0)
+            {
+                dataGridView1.Columns.Add("ID_type", "ID");
+                dataGridView1.Columns.Add("Type", "Type");
+            }
+
+            foreach (TypeLivre typeLivre in listeTypeLivre)
+            {
+                dataGridView1.Rows.Add(typeLivre.GetIdTypeLivre(), typeLivre.GetLibelle());
+            }
+
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;// Ajustez la largeur des colonnes pour remplir la grille
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;//Sélectionnez toute la ligne au lieu d'une cellule
             dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Tan;// Changez la couleur des en-têtes de colonnes
@@ -58,103 +102,99 @@ namespace Mots_Merveilles.Forms
             dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.FloralWhite;// Changez la couleur des lignes alternatives
             dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Tan;// Changez la couleur de fond de la ligne sélectionnée
         }
-        private void lbNomAuteur_Click(object sender, EventArgs e)
-        {
 
-        }
-
+        /// <summary>
+        /// Gestion de l'événement click sur le bouton Créer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btCreer_Click(object sender, EventArgs e)
         {
-            if (txtType.Text != "")
+            // Vérifiez si le champ est vide et si le texte est valide
+            if (txtType.Text != "" && !ControleEntree.VerifierTexteNom(txtType.Text))
             {
-                try
+                if (!typeLivreManager.TypeLivreExiste(txtType.Text))
                 {
+                    try
                     {
-                        string query = "INSERT INTO TypeLivre (type) VALUES (@type)";
+                        TypeLivre typeLivre = new TypeLivre(0, txtType.Text);
+                        int nbRow = typeLivreManager.CreerTypeLivre(typeLivre);
 
-                        // Définissez les paramètres
-                        SqlParameter[] parameters = {
-                            new SqlParameter("@type", SqlDbType.VarChar) { Value = txtType.Text },
-                        };
-
-                        connexion.EnvoyerDonnees(query, parameters);
+                        if (nbRow > 0)
+                        {
+                            MessageBox.Show("Le type a bien été créé", "Création réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            AfficherTypes();
+                            txtType.Text = "";
+                        }
+                        else { MessageBox.Show("Erreur lors de la création du type : Aucune ligne n'a été ajoutée", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);}
                     }
-
-                    MessageBox.Show("Le type a bien été créé", "Création réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    AfficherTypes();
-                    txtType.Text = "";
+                    catch (Exception ex) { MessageBox.Show("Erreur lors de la création du type : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);}
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Erreur lors de la création du type : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                else { MessageBox.Show("Ce type existe déjà", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);}
             }
-            else
-            {
-                MessageBox.Show("Veuillez remplir tous les champs", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            else { MessageBox.Show("Veuillez remplir tous les champs, sans chiffre ni caractère spéciaux.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);}
         }
 
+        /// <summary>
+        /// Gestion de l'événement click sur le bouton Modifier
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btModifier_Click(object sender, EventArgs e)
         {
-            if (txtType.Text != "")
+            if (txtType.Text != "" && !ControleEntree.VerifierTexteNom(txtType.Text))
             {
                 try
                 {
+                    int idType = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["ID_type"].Value);
+                    TypeLivre typeLivre = new TypeLivre(idType, txtType.Text);
+                    int nbRow = typeLivreManager.ModifierTypeLivre(typeLivre);
+
+                    if (nbRow > 0)
                     {
-                        string query = "UPDATE TypeLivre SET type=@type WHERE ID_type =@id;";
-
-                        // Définissez les paramètres
-                        SqlParameter[] parameters = {
-                            new SqlParameter("@type", SqlDbType.VarChar) { Value = txtType.Text },
-                            new SqlParameter("@id", SqlDbType.VarChar) { Value = dataGridView1.SelectedRows[0].Cells[0].Value.ToString()}
-                        };
-                        connexion.EnvoyerDonnees(query, parameters);
+                        MessageBox.Show("Le type a bien été modifié", "Modification réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        AfficherTypes();
+                        txtType.Text = "";
                     }
-                    MessageBox.Show("Le type a bien été modifié.", "Modification réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    AfficherTypes();
-                    txtType.Text = "";
+                    else
+                    { MessageBox.Show("Erreur lors de la modification du type : Aucune ligne n'a été modifiée", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);}
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Erreur lors de la modification du type : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                catch (Exception ex) { MessageBox.Show("Erreur lors de la modification du type : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);}
             }
-            else
-            {
-                MessageBox.Show("Veuillez remplir tous les champs", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            else { MessageBox.Show("Veuillez remplir tous les champs, sans chiffre ni caractere special", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);}
         }
-
+        
+        /// <summary>
+        /// Gestions de l'événement click sur le bouton Supprimer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btSupprimer_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                // Affichez une boîte de dialogue de confirmation
                 DialogResult result = MessageBox.Show("Êtes-vous sûr de vouloir supprimer ce type : " + txtType.Text, "Confirmation de suppression", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                // Si l'utilisateur clique sur "Oui", supprimez l'auteur
                 if (result == DialogResult.Yes)
                 {
-
-                    try
+                    if (!typeLivreManager.LivreAssocie(Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["ID_type"].Value)))
                     {
-                        string query = "DELETE FROM TypeLivre WHERE ID_type=@id;";
+                        try
+                        {
+                            int idType = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["ID_type"].Value);
+                            int nbRow = typeLivreManager.SupprimerTypeLivre(idType);
 
-                        // Définissez les paramètres
-                        SqlParameter[] parameters = {
-                            new SqlParameter("@id", SqlDbType.VarChar) { Value = dataGridView1.SelectedRows[0].Cells["ID_type"].Value.ToString() }
-                        };
-
-                        connexion.EnvoyerDonnees(query, parameters);
-
-                        MessageBox.Show("Le type a bien été supprimé.", "Suppression réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        AfficherTypes();
+                            if (nbRow > 0)
+                            {
+                                MessageBox.Show("Le type a bien été supprimé", "Suppression réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                AfficherTypes();
+                            }
+                            else { MessageBox.Show("Erreur lors de la suppression du type : Aucune ligne n'a été supprimée", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                        catch (Exception ex) { MessageBox.Show("Erreur lors de la suppression du type : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Erreur lors de la suppression du type : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    else{MessageBox.Show("Ce type est associé à un livre, il ne peut pas être supprimé", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
                 }
             }
         }
