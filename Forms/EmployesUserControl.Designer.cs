@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             lbMail = new Label();
             txtMail = new TextBox();
             lbTelephone = new Label();
@@ -48,14 +50,6 @@
             comboBoxGenre = new ComboBox();
             lbVille = new Label();
             txtVille = new TextBox();
-            comboBoxGroupe = new ComboBox();
-            lbGroupe = new Label();
-            comboBoxActif = new ComboBox();
-            lbActif = new Label();
-            lbMDP = new Label();
-            txtMDP = new TextBox();
-            lbIdentifiant = new Label();
-            txtIdentifiant = new TextBox();
             dataGridView1 = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -74,11 +68,12 @@
             // 
             txtMail.BackColor = Color.White;
             txtMail.BorderStyle = BorderStyle.FixedSingle;
+            txtMail.CharacterCasing = CharacterCasing.Lower;
             txtMail.Location = new Point(576, 117);
             txtMail.Margin = new Padding(2, 3, 2, 3);
             txtMail.Name = "txtMail";
             txtMail.Size = new Size(188, 27);
-            txtMail.TabIndex = 37;
+            txtMail.TabIndex = 8;
             // 
             // lbTelephone
             // 
@@ -98,18 +93,18 @@
             txtTelephone.Margin = new Padding(2, 3, 2, 3);
             txtTelephone.Name = "txtTelephone";
             txtTelephone.Size = new Size(188, 27);
-            txtTelephone.TabIndex = 35;
+            txtTelephone.TabIndex = 7;
             // 
             // btSupprimer
             // 
             btSupprimer.BackColor = Color.FromArgb(107, 59, 59);
             btSupprimer.FlatStyle = FlatStyle.Flat;
             btSupprimer.ForeColor = Color.FloralWhite;
-            btSupprimer.Location = new Point(722, 232);
+            btSupprimer.Location = new Point(722, 194);
             btSupprimer.Margin = new Padding(2, 3, 2, 3);
             btSupprimer.Name = "btSupprimer";
             btSupprimer.Size = new Size(155, 32);
-            btSupprimer.TabIndex = 33;
+            btSupprimer.TabIndex = 11;
             btSupprimer.Text = "Supprimer";
             btSupprimer.UseVisualStyleBackColor = false;
             btSupprimer.Click += btSupprimer_Click;
@@ -118,11 +113,11 @@
             // 
             btModifier.BackColor = Color.Tan;
             btModifier.FlatStyle = FlatStyle.Flat;
-            btModifier.Location = new Point(537, 232);
+            btModifier.Location = new Point(537, 194);
             btModifier.Margin = new Padding(2, 3, 2, 3);
             btModifier.Name = "btModifier";
             btModifier.Size = new Size(155, 32);
-            btModifier.TabIndex = 32;
+            btModifier.TabIndex = 10;
             btModifier.Text = "Modifier";
             btModifier.UseVisualStyleBackColor = false;
             btModifier.Click += btModifier_Click;
@@ -131,11 +126,11 @@
             // 
             btCreer.BackColor = Color.Tan;
             btCreer.FlatStyle = FlatStyle.Flat;
-            btCreer.Location = new Point(352, 232);
+            btCreer.Location = new Point(352, 194);
             btCreer.Margin = new Padding(2, 3, 2, 3);
             btCreer.Name = "btCreer";
             btCreer.Size = new Size(155, 32);
-            btCreer.TabIndex = 31;
+            btCreer.TabIndex = 9;
             btCreer.Text = "Créer";
             btCreer.UseVisualStyleBackColor = false;
             btCreer.Click += btCreer_Click;
@@ -158,7 +153,7 @@
             txtAdresse.Margin = new Padding(2, 3, 2, 3);
             txtAdresse.Name = "txtAdresse";
             txtAdresse.Size = new Size(188, 27);
-            txtAdresse.TabIndex = 29;
+            txtAdresse.TabIndex = 5;
             // 
             // lbNom
             // 
@@ -179,7 +174,8 @@
             txtNom.Margin = new Padding(2, 3, 2, 3);
             txtNom.Name = "txtNom";
             txtNom.Size = new Size(188, 27);
-            txtNom.TabIndex = 27;
+            txtNom.TabIndex = 1;
+            txtNom.TextChanged += txtBox_TextChanged;
             // 
             // lbPrenom
             // 
@@ -199,7 +195,8 @@
             txtPrenom.Margin = new Padding(2, 3, 2, 3);
             txtPrenom.Name = "txtPrenom";
             txtPrenom.Size = new Size(188, 27);
-            txtPrenom.TabIndex = 39;
+            txtPrenom.TabIndex = 2;
+            txtPrenom.TextChanged += txtBox_TextChanged;
             // 
             // lbDate
             // 
@@ -216,9 +213,10 @@
             dateTimePicker1.Format = DateTimePickerFormat.Short;
             dateTimePicker1.Location = new Point(980, 14);
             dateTimePicker1.Margin = new Padding(2, 3, 2, 3);
+            dateTimePicker1.MinDate = new DateTime(1900, 1, 1, 0, 0, 0, 0);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(188, 27);
-            dateTimePicker1.TabIndex = 42;
+            dateTimePicker1.TabIndex = 3;
             // 
             // lbGenre
             // 
@@ -232,13 +230,14 @@
             // 
             // comboBoxGenre
             // 
+            comboBoxGenre.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxGenre.FormattingEnabled = true;
             comboBoxGenre.Items.AddRange(new object[] { "Homme", "Femme" });
             comboBoxGenre.Location = new Point(153, 63);
             comboBoxGenre.Margin = new Padding(2, 3, 2, 3);
             comboBoxGenre.Name = "comboBoxGenre";
             comboBoxGenre.Size = new Size(188, 28);
-            comboBoxGenre.TabIndex = 44;
+            comboBoxGenre.TabIndex = 4;
             // 
             // lbVille
             // 
@@ -254,128 +253,54 @@
             // 
             txtVille.BackColor = Color.White;
             txtVille.BorderStyle = BorderStyle.FixedSingle;
+            txtVille.CharacterCasing = CharacterCasing.Upper;
             txtVille.Location = new Point(980, 66);
             txtVille.Margin = new Padding(2, 3, 2, 3);
             txtVille.Name = "txtVille";
             txtVille.Size = new Size(188, 27);
-            txtVille.TabIndex = 45;
-            // 
-            // comboBoxGroupe
-            // 
-            comboBoxGroupe.FormattingEnabled = true;
-            comboBoxGroupe.Location = new Point(980, 117);
-            comboBoxGroupe.Margin = new Padding(2, 3, 2, 3);
-            comboBoxGroupe.Name = "comboBoxGroupe";
-            comboBoxGroupe.Size = new Size(188, 28);
-            comboBoxGroupe.TabIndex = 48;
-            // 
-            // lbGroupe
-            // 
-            lbGroupe.AutoSize = true;
-            lbGroupe.Location = new Point(865, 119);
-            lbGroupe.Margin = new Padding(2, 0, 2, 0);
-            lbGroupe.Name = "lbGroupe";
-            lbGroupe.Size = new Size(58, 20);
-            lbGroupe.TabIndex = 47;
-            lbGroupe.Text = "Groupe";
-            // 
-            // comboBoxActif
-            // 
-            comboBoxActif.FormattingEnabled = true;
-            comboBoxActif.Items.AddRange(new object[] { "Actif", "Inactif" });
-            comboBoxActif.Location = new Point(980, 172);
-            comboBoxActif.Margin = new Padding(2, 3, 2, 3);
-            comboBoxActif.Name = "comboBoxActif";
-            comboBoxActif.Size = new Size(188, 28);
-            comboBoxActif.TabIndex = 54;
-            // 
-            // lbActif
-            // 
-            lbActif.AutoSize = true;
-            lbActif.Location = new Point(881, 176);
-            lbActif.Margin = new Padding(2, 0, 2, 0);
-            lbActif.Name = "lbActif";
-            lbActif.Size = new Size(40, 20);
-            lbActif.TabIndex = 53;
-            lbActif.Text = "Actif";
-            // 
-            // lbMDP
-            // 
-            lbMDP.AutoSize = true;
-            lbMDP.Location = new Point(427, 177);
-            lbMDP.Margin = new Padding(2, 0, 2, 0);
-            lbMDP.Name = "lbMDP";
-            lbMDP.Size = new Size(98, 20);
-            lbMDP.TabIndex = 52;
-            lbMDP.Text = "Mot de passe";
-            // 
-            // txtMDP
-            // 
-            txtMDP.BackColor = Color.White;
-            txtMDP.BorderStyle = BorderStyle.FixedSingle;
-            txtMDP.Location = new Point(577, 172);
-            txtMDP.Margin = new Padding(2, 3, 2, 3);
-            txtMDP.Name = "txtMDP";
-            txtMDP.PasswordChar = '*';
-            txtMDP.Size = new Size(187, 27);
-            txtMDP.TabIndex = 51;
-            // 
-            // lbIdentifiant
-            // 
-            lbIdentifiant.AutoSize = true;
-            lbIdentifiant.Location = new Point(19, 176);
-            lbIdentifiant.Margin = new Padding(2, 0, 2, 0);
-            lbIdentifiant.Name = "lbIdentifiant";
-            lbIdentifiant.Size = new Size(77, 20);
-            lbIdentifiant.TabIndex = 50;
-            lbIdentifiant.Text = "Identifiant";
-            // 
-            // txtIdentifiant
-            // 
-            txtIdentifiant.BackColor = Color.White;
-            txtIdentifiant.BorderStyle = BorderStyle.FixedSingle;
-            txtIdentifiant.Location = new Point(153, 173);
-            txtIdentifiant.Margin = new Padding(2, 3, 2, 3);
-            txtIdentifiant.Name = "txtIdentifiant";
-            txtIdentifiant.Size = new Size(188, 27);
-            txtIdentifiant.TabIndex = 49;
+            txtVille.TabIndex = 6;
             // 
             // dataGridView1
             // 
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridViewCellStyle1.BackColor = Color.FloralWhite;
+            dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.BackgroundColor = SystemColors.Control;
             dataGridView1.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = Color.Transparent;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.Tan;
+            dataGridViewCellStyle2.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = Color.Transparent;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(13, 289);
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Window;
+            dataGridViewCellStyle3.Font = new Font("Copperplate Gothic Light", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = Color.Tan;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridView1.EnableHeadersVisualStyles = false;
+            dataGridView1.Location = new Point(54, 259);
             dataGridView1.Margin = new Padding(2, 3, 2, 3);
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
+            dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.RowTemplate.Height = 29;
-            dataGridView1.ScrollBars = ScrollBars.Horizontal;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(1177, 266);
-            dataGridView1.TabIndex = 55;
+            dataGridView1.Size = new Size(1098, 275);
+            dataGridView1.TabIndex = 47;
             // 
             // EmployesUserControl
             // 
             AutoScaleMode = AutoScaleMode.None;
             Controls.Add(dataGridView1);
-            Controls.Add(comboBoxActif);
-            Controls.Add(lbActif);
-            Controls.Add(lbMDP);
-            Controls.Add(txtMDP);
-            Controls.Add(lbIdentifiant);
-            Controls.Add(txtIdentifiant);
-            Controls.Add(comboBoxGroupe);
-            Controls.Add(lbGroupe);
             Controls.Add(lbVille);
             Controls.Add(txtVille);
             Controls.Add(comboBoxGenre);
@@ -398,7 +323,7 @@
             Margin = new Padding(2, 3, 2, 3);
             Name = "EmployesUserControl";
             Size = new Size(1204, 558);
-            Load += Employes_Load;
+            Load += EmployesUserControl_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -410,7 +335,6 @@
         private TextBox txtMail;
         private Label lbTelephone;
         private TextBox txtTelephone;
-        private DataGridView dataGridView1;
         private Button btSupprimer;
         private Button btModifier;
         private Button btCreer;
@@ -426,13 +350,6 @@
         private ComboBox comboBoxGenre;
         private Label lbVille;
         private TextBox txtVille;
-        private ComboBox comboBoxGroupe;
-        private Label lbGroupe;
-        private ComboBox comboBoxActif;
-        private Label lbActif;
-        private Label lbMDP;
-        private TextBox txtMDP;
-        private Label lbIdentifiant;
-        private TextBox txtIdentifiant;
+        private DataGridView dataGridView1;
     }
 }

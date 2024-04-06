@@ -34,6 +34,7 @@
             btEmployes = new Button();
             lbTitre = new Label();
             panelContenu = new Panel();
+            btnUtilisateurs = new Button();
             SuspendLayout();
             // 
             // btAuteurs
@@ -55,7 +56,7 @@
             // 
             btEditeurs.BackColor = Color.FromArgb(107, 59, 59);
             btEditeurs.ForeColor = Color.FloralWhite;
-            btEditeurs.Location = new Point(18, 254);
+            btEditeurs.Location = new Point(18, 240);
             btEditeurs.Margin = new Padding(2, 3, 2, 3);
             btEditeurs.Name = "btEditeurs";
             btEditeurs.Size = new Size(169, 47);
@@ -70,7 +71,7 @@
             // 
             btTypeLivre.BackColor = Color.FromArgb(107, 59, 59);
             btTypeLivre.ForeColor = Color.FloralWhite;
-            btTypeLivre.Location = new Point(18, 348);
+            btTypeLivre.Location = new Point(18, 319);
             btTypeLivre.Margin = new Padding(2, 3, 2, 3);
             btTypeLivre.Name = "btTypeLivre";
             btTypeLivre.Size = new Size(169, 47);
@@ -85,7 +86,7 @@
             // 
             btEmployes.BackColor = Color.FromArgb(107, 59, 59);
             btEmployes.ForeColor = Color.FloralWhite;
-            btEmployes.Location = new Point(18, 524);
+            btEmployes.Location = new Point(18, 498);
             btEmployes.Margin = new Padding(2, 3, 2, 3);
             btEmployes.Name = "btEmployes";
             btEmployes.Size = new Size(169, 47);
@@ -115,10 +116,24 @@
             panelContenu.Size = new Size(1204, 607);
             panelContenu.TabIndex = 9;
             // 
+            // btnUtilisateurs
+            // 
+            btnUtilisateurs.BackColor = Color.FromArgb(107, 59, 59);
+            btnUtilisateurs.ForeColor = Color.FloralWhite;
+            btnUtilisateurs.Location = new Point(18, 572);
+            btnUtilisateurs.Margin = new Padding(2, 3, 2, 3);
+            btnUtilisateurs.Name = "btnUtilisateurs";
+            btnUtilisateurs.Size = new Size(169, 47);
+            btnUtilisateurs.TabIndex = 10;
+            btnUtilisateurs.Text = "Utilisateurs";
+            btnUtilisateurs.UseVisualStyleBackColor = false;
+            btnUtilisateurs.Click += btnUtilisateurs_Click;
+            // 
             // MenuAdministrationUserControl
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = SystemColors.Control;
+            Controls.Add(btnUtilisateurs);
             Controls.Add(panelContenu);
             Controls.Add(lbTitre);
             Controls.Add(btEmployes);
@@ -140,5 +155,6 @@
         private Button btEmployes;
         private Label lbTitre;
         private Panel panelContenu;
+        private Button btnUtilisateurs;
     }
 }

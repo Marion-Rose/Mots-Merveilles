@@ -71,7 +71,7 @@ namespace Mots_Merveilles.Forms
         {
             CRCommande Obj = new CRCommande(true);
             Obj.ShowDialog();
-            this.Show();
+            //Obj.Show();
             AfficherCommandes();
         }
 
@@ -84,7 +84,7 @@ namespace Mots_Merveilles.Forms
         {
             CRCommande Obj = new CRCommande(false, Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value));
             Obj.ShowDialog();
-            this.Show();
+            //Obj.Show();
             AfficherCommandes();
         }
 

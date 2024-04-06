@@ -18,15 +18,6 @@ namespace Mots_Merveilles.Managers
             return char.ToUpper(entree[0]) + entree.Substring(1).ToLower();
         }
 
-        public static string FormaterTexteMail(string entree)
-        {
-            if (string.IsNullOrEmpty(entree))
-            {
-                return entree;
-            }
-            return entree.ToLower();
-        }
-
         public static string FormaterTextePrix(string entree)
         {
             if (string.IsNullOrEmpty(entree))
@@ -38,7 +29,8 @@ namespace Mots_Merveilles.Managers
 
         public static bool VerifierTexteNom(string entree)
         {
-            Regex regex = new Regex("[^a-zA-Z'\\s-]");
+            //séquence d'un ou plusieurs caractères alphabétiques, apostrophes, espaces ou tirets
+            Regex regex = new Regex("^[a-zA-Z'\\s-]*$");
             return regex.IsMatch(entree);
         }
 
@@ -46,14 +38,14 @@ namespace Mots_Merveilles.Managers
         {
             //séquence d'un ou plusieurs caractères alphanumériques, points ou tirets + @ + séquence d'un ou plusieurs caractères alphanumériques ou tirets + point + séquence de 2 ou 3 caractères alphanumériques
             Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
-            return !regex.IsMatch(entree);
+            return regex.IsMatch(entree);
         }
 
         public static bool VerifierTexteTelephone(string entree)
         {
             //séquence de 10 chiffres
             Regex regex = new Regex(@"^[0-9]{10}$");
-            return !regex.IsMatch(entree);
+            return regex.IsMatch(entree);
         }
 
         public static bool VerifierTextePrix(string entree)

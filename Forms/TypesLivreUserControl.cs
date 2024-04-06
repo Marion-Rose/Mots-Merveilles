@@ -94,13 +94,6 @@ namespace Mots_Merveilles.Forms
             {
                 dataGridView1.Rows.Add(typeLivre.GetIdTypeLivre(), typeLivre.GetLibelle());
             }
-
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;// Ajustez la largeur des colonnes pour remplir la grille
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;//Sélectionnez toute la ligne au lieu d'une cellule
-            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Tan;// Changez la couleur des en-têtes de colonnes
-            dataGridView1.EnableHeadersVisualStyles = false;//Annule le style par défaut des en-têtes de colonnes
-            dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.FloralWhite;// Changez la couleur des lignes alternatives
-            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Tan;// Changez la couleur de fond de la ligne sélectionnée
         }
 
         /// <summary>
@@ -111,7 +104,7 @@ namespace Mots_Merveilles.Forms
         private void btCreer_Click(object sender, EventArgs e)
         {
             // Vérifiez si le champ est vide et si le texte est valide
-            if (txtType.Text != "" && !ControleEntree.VerifierTexteNom(txtType.Text))
+            if (txtType.Text != "" && ControleEntree.VerifierTexteNom(txtType.Text))
             {
                 if (!typeLivreManager.TypeLivreExiste(txtType.Text))
                 {
@@ -142,7 +135,7 @@ namespace Mots_Merveilles.Forms
         /// <param name="e"></param>
         private void btModifier_Click(object sender, EventArgs e)
         {
-            if (txtType.Text != "" && !ControleEntree.VerifierTexteNom(txtType.Text))
+            if (txtType.Text != "" && ControleEntree.VerifierTexteNom(txtType.Text))
             {
                 try
                 {

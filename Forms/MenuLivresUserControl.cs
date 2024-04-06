@@ -76,7 +76,7 @@ namespace Mots_Merveilles.Forms
         {
             CRLivre Obj = new CRLivre(true);
             Obj.ShowDialog();
-            this.Show();
+            //Obj.Show();
             AfficherLivres();
         }
 
@@ -91,7 +91,7 @@ namespace Mots_Merveilles.Forms
             {
                 CRLivre Obj = new CRLivre(false, Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value));
                 Obj.ShowDialog();
-                this.Show();
+                //Obj.Show();
                 AfficherLivres();
             }
             else

@@ -38,6 +38,7 @@
             linkLbUtilisateur = new LinkLabel();
             pictureBox2 = new PictureBox();
             panelContenu = new Panel();
+            lbDeconnexion = new LinkLabel();
             pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -149,11 +150,28 @@
             panelContenu.Size = new Size(1459, 685);
             panelContenu.TabIndex = 6;
             // 
+            // lbDeconnexion
+            // 
+            lbDeconnexion.BackColor = SystemColors.Control;
+            lbDeconnexion.Font = new Font("Copperplate Gothic Light", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            lbDeconnexion.ForeColor = SystemColors.Control;
+            lbDeconnexion.LinkColor = Color.FromArgb(107, 57, 57);
+            lbDeconnexion.Location = new Point(1340, 9);
+            lbDeconnexion.Name = "lbDeconnexion";
+            lbDeconnexion.Size = new Size(205, 39);
+            lbDeconnexion.TabIndex = 7;
+            lbDeconnexion.TabStop = true;
+            lbDeconnexion.Text = "Se déconnecter";
+            lbDeconnexion.TextAlign = ContentAlignment.MiddleRight;
+            lbDeconnexion.VisitedLinkColor = Color.FromArgb(107, 57, 57);
+            lbDeconnexion.LinkClicked += lbDeconnexion_LinkClicked;
+            // 
             // Accueil
             // 
             AutoScaleDimensions = new SizeF(14F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1567, 903);
+            Controls.Add(lbDeconnexion);
             Controls.Add(panelContenu);
             Controls.Add(pictureBox2);
             Controls.Add(linkLbUtilisateur);
@@ -182,5 +200,6 @@
         private LinkLabel linkLbUtilisateur;
         private PictureBox pictureBox2;
         private Panel panelContenu;
+        private LinkLabel lbDeconnexion;
     }
 }

@@ -11,7 +11,7 @@ namespace Mots_Merveilles
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            Application.Run(new Accueil());
+            Application.Run(new Connexion());
         }
     }
 }

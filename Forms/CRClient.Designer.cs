@@ -67,16 +67,17 @@
             txtVille.Location = new Point(142, 232);
             txtVille.Name = "txtVille";
             txtVille.Size = new Size(210, 29);
-            txtVille.TabIndex = 69;
+            txtVille.TabIndex = 9;
             // 
             // comboBoxGenre
             // 
+            comboBoxGenre.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxGenre.FormattingEnabled = true;
             comboBoxGenre.Items.AddRange(new object[] { "Homme", "Femme" });
             comboBoxGenre.Location = new Point(580, 77);
             comboBoxGenre.Name = "comboBoxGenre";
             comboBoxGenre.Size = new Size(210, 29);
-            comboBoxGenre.TabIndex = 68;
+            comboBoxGenre.TabIndex = 4;
             // 
             // lbGenre
             // 
@@ -91,9 +92,10 @@
             // 
             dateTimePicker1.Format = DateTimePickerFormat.Short;
             dateTimePicker1.Location = new Point(142, 72);
+            dateTimePicker1.MinDate = new DateTime(1900, 1, 1, 0, 0, 0, 0);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(210, 29);
-            dateTimePicker1.TabIndex = 66;
+            dateTimePicker1.TabIndex = 3;
             // 
             // lbDate
             // 
@@ -120,7 +122,7 @@
             txtPrenom.Location = new Point(580, 24);
             txtPrenom.Name = "txtPrenom";
             txtPrenom.Size = new Size(210, 29);
-            txtPrenom.TabIndex = 63;
+            txtPrenom.TabIndex = 2;
             txtPrenom.TextChanged += txtBox_TextChanged;
             // 
             // lbMail
@@ -136,11 +138,11 @@
             // 
             txtMail.BackColor = Color.White;
             txtMail.BorderStyle = BorderStyle.FixedSingle;
+            txtMail.CharacterCasing = CharacterCasing.Lower;
             txtMail.Location = new Point(580, 130);
             txtMail.Name = "txtMail";
             txtMail.Size = new Size(271, 29);
-            txtMail.TabIndex = 61;
-            txtMail.TextChanged += txtBox_TextChanged;
+            txtMail.TabIndex = 6;
             // 
             // lbTelephone
             // 
@@ -158,7 +160,7 @@
             txtTelephone.Location = new Point(142, 126);
             txtTelephone.Name = "txtTelephone";
             txtTelephone.Size = new Size(211, 29);
-            txtTelephone.TabIndex = 59;
+            txtTelephone.TabIndex = 5;
             // 
             // lbAdresse
             // 
@@ -176,7 +178,7 @@
             txtAdresse.Location = new Point(142, 178);
             txtAdresse.Name = "txtAdresse";
             txtAdresse.Size = new Size(271, 29);
-            txtAdresse.TabIndex = 57;
+            txtAdresse.TabIndex = 7;
             // 
             // lbNom
             // 
@@ -195,7 +197,7 @@
             txtNom.Location = new Point(142, 22);
             txtNom.Name = "txtNom";
             txtNom.Size = new Size(210, 29);
-            txtNom.TabIndex = 55;
+            txtNom.TabIndex = 1;
             // 
             // lbCP
             // 
@@ -213,7 +215,7 @@
             txtCP.Location = new Point(580, 180);
             txtCP.Name = "txtCP";
             txtCP.Size = new Size(147, 29);
-            txtCP.TabIndex = 79;
+            txtCP.TabIndex = 8;
             // 
             // btModifier
             // 
@@ -223,7 +225,7 @@
             btModifier.Location = new Point(350, 291);
             btModifier.Name = "btModifier";
             btModifier.Size = new Size(181, 49);
-            btModifier.TabIndex = 82;
+            btModifier.TabIndex = 10;
             btModifier.Text = "Modifier";
             btModifier.UseVisualStyleBackColor = false;
             btModifier.Click += btModifier_Click;
@@ -236,7 +238,7 @@
             btCreer.Location = new Point(350, 291);
             btCreer.Name = "btCreer";
             btCreer.Size = new Size(181, 49);
-            btCreer.TabIndex = 81;
+            btCreer.TabIndex = 10;
             btCreer.Text = "Créer";
             btCreer.UseVisualStyleBackColor = false;
             btCreer.Click += btCreer_Click;

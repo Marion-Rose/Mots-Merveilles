@@ -98,12 +98,7 @@ namespace Mots_Merveilles.Forms
                 dataGridView1.Rows.Add(auteur.GetIdAuteur(), auteur.GetNom(), auteur.GetPrenom());
             }
 
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;// Ajustez la largeur des colonnes pour remplir la grille
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;//Sélectionnez toute la ligne au lieu d'une cellule
-            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Tan;// Changez la couleur des en-têtes de colonnes
-            dataGridView1.EnableHeadersVisualStyles = false;//Annule le style par défaut des en-têtes de colonnes
-            dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.FloralWhite;// Changez la couleur des lignes alternatives
-            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Tan;// Changez la couleur de fond de la ligne sélectionnée
+            
         }
 
         /// <summary>
@@ -114,7 +109,8 @@ namespace Mots_Merveilles.Forms
         private void btCreer_Click(object sender, EventArgs e)
         {
             //Verifie que les champs ne sont pas vides et qu'ils ne contiennent pas de caractères spéciaux ou de chiffres
-            if (txtNomAuteur.Text != "" && txtPrenomAuteur.Text != "" && !ControleEntree.VerifierTexteNom(txtNomAuteur.Text) && !ControleEntree.VerifierTexteNom(txtPrenomAuteur.Text))
+            if (txtNomAuteur.Text != "" && txtPrenomAuteur.Text != "" 
+                && ControleEntree.VerifierTexteNom(txtNomAuteur.Text) && ControleEntree.VerifierTexteNom(txtPrenomAuteur.Text))
             {
                 //Vérifie si l'auteur existe déjà
                 if (!auteurManager.EntreeExisteDeja(txtNomAuteur.Text, txtPrenomAuteur.Text))
@@ -148,7 +144,8 @@ namespace Mots_Merveilles.Forms
         private void btModifier_Click(object sender, EventArgs e)
         {
             //Verifie que les champs ne sont pas vides et qu'ils ne contiennent pas de caractères spéciaux ou de chiffres
-            if (txtNomAuteur.Text != "" && txtPrenomAuteur.Text != "" && !ControleEntree.VerifierTexteNom(txtNomAuteur.Text) && !ControleEntree.VerifierTexteNom(txtPrenomAuteur.Text))
+            if (txtNomAuteur.Text != "" && txtPrenomAuteur.Text != "" 
+                && ControleEntree.VerifierTexteNom(txtNomAuteur.Text) && ControleEntree.VerifierTexteNom(txtPrenomAuteur.Text))
             {
                 try
                 {

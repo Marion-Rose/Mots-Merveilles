@@ -12,18 +12,17 @@ namespace Mots_Merveilles.Managers
 {
     public class Authentification
     {
-#pragma warning disable CS8618 // Un champ non-nullable doit contenir une valeur non-null lors de la fermeture du constructeur. Envisagez de déclarer le champ comme nullable.
         private static Authentification instance;
-#pragma warning restore CS8618 // Un champ non-nullable doit contenir une valeur non-null lors de la fermeture du constructeur. Envisagez de déclarer le champ comme nullable.
         private Utilisateur utilisateurCo;
+        private EmployeManager employeManager;
+        private GroupeUtilisateurManager groupeUtilisateurManager;
         ConnexionManager connexion;
 
-
-#pragma warning disable CS8618 // Un champ non-nullable doit contenir une valeur non-null lors de la fermeture du constructeur. Envisagez de déclarer le champ comme nullable.
         private Authentification()
-#pragma warning restore CS8618 // Un champ non-nullable doit contenir une valeur non-null lors de la fermeture du constructeur. Envisagez de déclarer le champ comme nullable.
         {
             connexion = new ConnexionManager();
+            employeManager = new EmployeManager();
+            groupeUtilisateurManager = new GroupeUtilisateurManager();
         }
 
         public static Authentification Instance()
@@ -41,7 +40,7 @@ namespace Mots_Merveilles.Managers
             set { utilisateurCo = value; }
         }
 
-        public bool Authentication(string utilisateur, string motDePasse)
+        public bool Authentication(string utilisateur, string motDePasseUtilise)
         {
             try
             {
@@ -51,26 +50,29 @@ namespace Mots_Merveilles.Managers
                 {
                     connection.Open();
 
-                    string query = "SELECT * FROM employe WHERE identifiant=@utilisateur AND mot_de_passe=@motDePasse;";
+                    string query = "SELECT * FROM Utilisateur WHERE identifiant=@utilisateur AND mot_de_passe=@motDePasse;";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         // Définissez les paramètres
                         command.Parameters.AddWithValue("@utilisateur", utilisateur);
-                        command.Parameters.AddWithValue("@motDePasse", motDePasse);
+                        command.Parameters.AddWithValue("@motDePasse", motDePasseUtilise);
 
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             if (reader.Read())
                             {
-                                int id = reader.GetInt32(reader.GetOrdinal("ID_employe"));
-                                string nom = reader.GetString(reader.GetOrdinal("nom"));
-                                string prenom = reader.GetString(reader.GetOrdinal("prenom"));
+                                int id = reader.GetInt32(reader.GetOrdinal("ID_utilisateur"));
+                                int idEmploye = reader.GetInt32(reader.GetOrdinal("ID_employe"));
                                 string identifiant = reader.GetString(reader.GetOrdinal("identifiant"));
+                                string motDePasse = reader.GetString(reader.GetOrdinal("mot_de_passe"));
                                 bool estActif = reader.GetBoolean(reader.GetOrdinal("est_actif"));
                                 int groupe = reader.GetInt32(reader.GetOrdinal("groupe"));
-                                utilisateurCo = new Utilisateur(id, nom, prenom, identifiant, estActif, groupe);
-                                MessageBox.Show("Connexion réussie !");
+
+                                Employe employe = employeManager.AfficherEmploye(idEmploye);
+                                GroupeUtilisateur groupeUtilisateur = groupeUtilisateurManager.AfficherGroupeUtilisateur(groupe);
+
+                                utilisateurCo = new Utilisateur(id, employe, identifiant, motDePasse, estActif, groupeUtilisateur);
                                 return true;
                             }
                             else

@@ -134,10 +134,10 @@ namespace Mots_Merveilles.Managers
 
             SqlParameter[] parameters = {
                             new SqlParameter("@titre", SqlDbType.VarChar) { Value = livre.GetTitre() },
-                            new SqlParameter("@auteur", SqlDbType.VarChar) { Value = livre.GetAuteur().GetIdAuteur() },
-                            new SqlParameter("@editeur", SqlDbType.VarChar) { Value = livre.GetEditeur().GetIdEditeur()},
-                            new SqlParameter("@isbn", SqlDbType.VarChar) { Value = livre.GetIsbn()},
-                            new SqlParameter("@type", SqlDbType.VarChar) { Value = livre.GetType() },
+                            new SqlParameter("@ID_auteur", SqlDbType.VarChar) { Value = livre.GetAuteur().GetIdAuteur() },
+                            new SqlParameter("@ID_editeur", SqlDbType.VarChar) { Value = livre.GetEditeur().GetIdEditeur()},
+                            new SqlParameter("@ISBN", SqlDbType.VarChar) { Value = livre.GetIsbn()},
+                            new SqlParameter("@ID_type", SqlDbType.VarChar) { Value = livre.GetType().GetIdTypeLivre() },
                             new SqlParameter("@prix", SqlDbType.Money) { Value = livre.GetPrix() },
                             new SqlParameter("@quantite", SqlDbType.VarChar) { Value = livre.GetQuantite() }
             };

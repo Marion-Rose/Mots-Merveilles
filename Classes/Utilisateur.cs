@@ -2,76 +2,49 @@
 
 namespace Mots_Merveilles.Classes
 {
+    /// <summary>
+    /// Classe Utilisateur
+    /// </summary>
     public class Utilisateur
     {
         private int ID;
-        private string nom;
-        private string prenom;
+        private Employe employe;
         private string identifiant;
+        private string motDePasse;
         private bool estActif;
-        private int groupe;
+        private GroupeUtilisateur groupe;
 
-        public Utilisateur(int ID, string nom, string prenom, string identifiant, bool estActif, int groupe)
+        /// <summary>
+        /// Constructeur de la classe Utilisateur
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <param name="employe"></param>
+        /// <param name="identifiant"></param>
+        /// <param name="motDePasse"></param>
+        /// <param name="estActif"></param>
+        /// <param name="groupe"></param>
+        public Utilisateur(int ID, Employe employe, string identifiant, string motDePasse, bool estActif, GroupeUtilisateur groupe)
         {
             this.ID = ID;
-            this.nom = nom;
-            this.prenom = prenom;
+            this.employe = employe;
             this.identifiant = identifiant;
+            this.motDePasse = motDePasse;
             this.estActif = estActif;
             this.groupe = groupe;
         }
-
-        public void SetID(int ID)
-        {
-            this.ID = ID;
-        }
-        public int GetID()
-        {
-            return ID;
-        }
-        public void SetNom(string nom)
-        {
-            this.nom = nom;
-        }
-        public string GetNom()
-        {
-            return nom;
-        }
-        public void SetPrenom(string prenom)
-        {
-            this.prenom = prenom;
-        }
-        public string GetPrenom()
-        {
-            return prenom;
-        }
-        public void SetIdentifiant(string identifiant)
-        {
-            this.identifiant = identifiant;
-        }
-        public string GetIdentifiant()
-        {
-            return identifiant;
-        }
-        public void SetEstActif(bool estActif)
-        {
-            this.estActif = estActif;
-        }
-        public bool GetEstActif()
-        {
-            return estActif;
-        }
-        public void SetGroupe(int groupe)
-        {
-            this.groupe = groupe;
-        }
-        public int GetGroupe()
-        {
-            return groupe;
-        }
-        public override string ToString()
-        {
-            return "ID :" + this.ID + ", nom: " + this.nom + ", prenom: " + this.prenom + ", Identifiant: " + this.identifiant + ", estActif : " + this.estActif + ", groupe : " + groupe;
-        }
+        
+        public void SetID(int ID) { this.ID = ID; }
+        public int GetID() { return this.ID; }
+        public void SetEmploye(Employe employe) { this.employe = employe; }
+        public Employe GetEmploye() { return this.employe; }
+        public void SetIdentifiant(string identifiant) { this.identifiant = identifiant; }
+        public string GetIdentifiant() { return this.identifiant; }
+        public void SetMotDePasse(string motDePasse) { this.motDePasse = motDePasse; }
+        public string GetMotDePasse() { return this.motDePasse; }
+        public void SetEstActif(bool estActif) { this.estActif = estActif; }
+        public bool GetEstActif() { return this.estActif; }
+        public void SetGroupe(GroupeUtilisateur groupe) { this.groupe = groupe; }
+        public GroupeUtilisateur GetGroupe() { return this.groupe; }
+        public override string ToString() { return this.employe.GetNom() + " " + this.employe.GetPrenom(); }
     }
 }
