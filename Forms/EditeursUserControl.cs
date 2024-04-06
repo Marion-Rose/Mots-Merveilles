@@ -1,4 +1,5 @@
 ﻿using Mots_Merveilles.Managers;
+using Mots_Merveilles.Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,40 +8,58 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Mots_Merveilles.Forms
 {
+    /// <summary>
+    /// Controle utilisateur pour la gestion des éditeurs
+    /// </summary>
     public partial class EditeursUserControl : UserControl
     {
-        ConnexionManager connexion;
+        private EditeurManager editeurManager;
+
+        /// <summary>
+        /// Constructeur de la classe EditeursUserControl
+        /// </summary>
         public EditeursUserControl()
         {
             InitializeComponent();
-            connexion = new ConnexionManager();
-#pragma warning disable CS8622 // La nullabilité des types référence dans le type du paramètre ne correspond pas au délégué cible (probablement en raison des attributs de nullabilité).
             this.Load += editeurs_Load;
-#pragma warning restore CS8622 // La nullabilité des types référence dans le type du paramètre ne correspond pas au délégué cible (probablement en raison des attributs de nullabilité).
+            this.editeurManager = new EditeurManager();
+        }
+
+        /// <summary>
+        /// Chargement du contrôle utilisateur
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void editeurs_Load(object sender, EventArgs e)
+        {
+            dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
             AfficherEditeurs();
         }
 
-        private void editeurs_Load(object sender, EventArgs e)
-        {
-#pragma warning disable CS8622 // La nullabilité des types référence dans le type du paramètre ne correspond pas au délégué cible (probablement en raison des attributs de nullabilité).
-            dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
-#pragma warning restore CS8622 // La nullabilité des types référence dans le type du paramètre ne correspond pas au délégué cible (probablement en raison des attributs de nullabilité).
-        }
-
+        /// <summary>
+        /// Gestion de la sélection d'une ligne dans le dataGridView
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 // Récupérez les valeurs de la ligne sélectionnée
-                txtNomEditeur.Text = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
-                txtAdresse.Text = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
-                txtTelephone.Text = dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
-                txtMail.Text = dataGridView1.SelectedRows[0].Cells[4].Value.ToString();
+                int columnIndexNom = dataGridView1.Columns["Nom"].Index;
+                int columnIndexAdresse = dataGridView1.Columns["Adresse"].Index;
+                int columnIndexTelephone = dataGridView1.Columns["Telephone"].Index;
+                int columnIndexMail = dataGridView1.Columns["Mail"].Index;
+                txtNomEditeur.Text = dataGridView1.SelectedRows[0].Cells[columnIndexNom].Value.ToString();
+                txtAdresse.Text = dataGridView1.SelectedRows[0].Cells[columnIndexAdresse].Value.ToString();
+                txtTelephone.Text = dataGridView1.SelectedRows[0].Cells[columnIndexTelephone].Value.ToString();
+                txtMail.Text = dataGridView1.SelectedRows[0].Cells[columnIndexMail].Value.ToString();
             }
             else
             {
@@ -51,10 +70,44 @@ namespace Mots_Merveilles.Forms
                 txtMail.Text = "";
             }
         }
+
+        /// <summary>
+        /// Gestion de la modification du texte dans les textBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtBox_TextChanged(object sender, EventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            string text = textBox.Text;
+            if (textBox.Name == "txtMail")
+            {
+                textBox.Text = ControleEntree.FormaterTexteMail(text);
+                textBox.SelectionStart = text.Length;
+            }
+        }
+
+        /// <summary>
+        /// Affichage des editeurs dans le dataGridView
+        /// </summary>
         private void AfficherEditeurs()
         {
-            string query = "SELECT * FROM Editeur";
-            dataGridView1.DataSource = connexion.RecupererDonnees(query);
+            List<Editeur> listeEditeurs = editeurManager.RecupererListeEditeur();
+            dataGridView1.Rows.Clear();
+            if (dataGridView1.Columns.Count == 0)
+            {
+                dataGridView1.Columns.Add("ID_editeur", "ID");
+                dataGridView1.Columns.Add("Nom", "Nom");
+                dataGridView1.Columns.Add("Adresse", "Adresse");
+                dataGridView1.Columns.Add("Telephone", "Téléphone");
+                dataGridView1.Columns.Add("Mail", "Mail");
+            }
+
+            foreach (Editeur editeur in listeEditeurs)
+            {
+                dataGridView1.Rows.Add(editeur.GetIdEditeur(), editeur.GetNom(), editeur.GetAdresse(), editeur.GetTelephone(), editeur.GetEmail());
+            }
+
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;// Ajustez la largeur des colonnes pour remplir la grille
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;//Sélectionnez toute la ligne au lieu d'une cellule
             dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Tan;// Changez la couleur des en-têtes de colonnes
@@ -63,104 +116,116 @@ namespace Mots_Merveilles.Forms
             dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Tan;// Changez la couleur de fond de la ligne sélectionnée
         }
 
+        /// <summary>
+        /// Gestion du clic sur le bouton Créer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btCreer_Click(object sender, EventArgs e)
         {
-            if (txtNomEditeur.Text != "" && txtAdresse.Text != "" && txtTelephone.Text != "" && txtMail.Text != "")
+            //Verifie les champs
+            if (txtNomEditeur.Text != "" && txtAdresse.Text != "" && txtTelephone.Text != "" && txtMail.Text != "" 
+                && !ControleEntree.VerifierTexteNom(txtNomEditeur.Text) && !ControleEntree.VerifierTexteMail(txtMail.Text) && !ControleEntree.VerifierTexteTelephone(txtTelephone.Text))
             {
-                try
-                {
+                //Verifie si l'editeur existe
+                if (!editeurManager.EditeurExiste(txtNomEditeur.Text))
+                { 
+                    try
                     {
-                        string query = "INSERT INTO Editeur (nom, adresse, telephone, mail) VALUES (@nom, @adresse, @telephone, @mail)";
-
-                        // Définissez les paramètres
-                        SqlParameter[] parameters = {
-                            new SqlParameter("@nom", SqlDbType.VarChar) { Value = txtNomEditeur.Text },
-                            new SqlParameter("@adresse", SqlDbType.VarChar) { Value = txtAdresse.Text },
-                            new SqlParameter("@telephone", SqlDbType.VarChar) { Value = txtTelephone.Text },
-                            new SqlParameter("@mail", SqlDbType.VarChar) { Value = txtMail.Text }
-                        };
-
-                        connexion.EnvoyerDonnees(query, parameters);
+                        Editeur nouvelEditeur = new Editeur(0, txtNomEditeur.Text, txtAdresse.Text, txtTelephone.Text, txtMail.Text);
+                        int nbRow = editeurManager.CreerEditeur(nouvelEditeur);
+                        
+                        if(nbRow > 0)
+                        {
+                            MessageBox.Show("L'editeur a bien été créé", "Création réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            AfficherEditeurs();
+                            txtNomEditeur.Text = "";
+                            txtAdresse.Text = "";
+                            txtTelephone.Text = "";
+                            txtMail.Text = "";
+                        }
+                        else { MessageBox.Show("Erreur lors de la création de l'éditeur : Aucune ligne n'a été ajoutée", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                        
                     }
-
-                    MessageBox.Show("L'editeur a bien été créé", "Création réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    AfficherEditeurs();
+                    catch (Exception ex)
+                    { MessageBox.Show("Erreur lors de la création de l'éditeur : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);}
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Erreur lors de la création de l'auteur : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                else { MessageBox.Show("L'éditeur existe déjà", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             }
-            else
-            {
-                MessageBox.Show("Veuillez remplir tous les champs", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            else { MessageBox.Show("Veuillez remplir tous les champs sous la forme attendue", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);}
         }
 
+        /// <summary>
+        /// Gestions du clic sur le bouton Modifier
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btModifier_Click(object sender, EventArgs e)
         {
-            if (txtNomEditeur.Text != "" && txtAdresse.Text != "" && txtTelephone.Text != "" && txtMail.Text != "")
+            //Verifie les champs
+            if (txtNomEditeur.Text != "" && txtAdresse.Text != "" && txtTelephone.Text != "" && txtMail.Text != ""
+                && !ControleEntree.VerifierTexteNom(txtNomEditeur.Text) && !ControleEntree.VerifierTexteMail(txtMail.Text) && !ControleEntree.VerifierTexteTelephone(txtTelephone.Text))
             {
                 try
                 {
-                    
-                        string query = "UPDATE Editeur SET nom=@nom, adresse=@adresse, telephone=@telephone, mail=@mail WHERE ID_editeur =@id;";
+                    int idEditeur = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["ID_editeur"].Value);
+                    Editeur editeurModifie = new Editeur(idEditeur, txtNomEditeur.Text, txtAdresse.Text, txtTelephone.Text, txtMail.Text);
+                    int nbRow = editeurManager.ModifierEditeur(editeurModifie);
 
-                        // Définissez les paramètres
-                        SqlParameter[] parameters = {
-                            new SqlParameter("@nom", SqlDbType.VarChar) { Value = txtNomEditeur.Text },
-                            new SqlParameter("@adresse", SqlDbType.VarChar) { Value = txtAdresse.Text },
-                            new SqlParameter("@telephone", SqlDbType.VarChar) { Value = txtTelephone.Text },
-                            new SqlParameter("@mail", SqlDbType.VarChar) { Value = txtMail.Text },
-                            new SqlParameter("@id", SqlDbType.VarChar) { Value = dataGridView1.SelectedRows[0].Cells[0].Value.ToString()}
-                        };
-                        connexion.EnvoyerDonnees(query, parameters);
+                    if (nbRow > 0)
+                    {
+                        MessageBox.Show("L'éditeur a bien été modifié.", "Modification réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        AfficherEditeurs();
+                        txtNomEditeur.Text = "";
+                        txtAdresse.Text = "";
+                        txtTelephone.Text = "";
+                        txtMail.Text = "";
+                    }
+                    else { MessageBox.Show("Erreur lors de la modification de l'éditeur : Aucune ligne n'a été modifiée", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
                     
-                    MessageBox.Show("L'éditeur a bien été modifié.", "Modification réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    AfficherEditeurs();
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Erreur lors de la modification de l'éditeur : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                catch (Exception ex) { MessageBox.Show("Erreur lors de la modification de l'éditeur : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);}
             }
-            else
-            {
-                MessageBox.Show("Veuillez remplir tous les champs", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            else { MessageBox.Show("Veuillez remplir tous les champs sous la forme attendue", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);}
         }
 
+        /// <summary>
+        /// Gestion du clic sur le bouton Supprimer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btSupprimer_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                // Affichez une boîte de dialogue de confirmation
                 DialogResult result = MessageBox.Show("Êtes-vous sûr de vouloir supprimer l'éditeur : " + txtNomEditeur.Text, "Confirmation de suppression", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                // Si l'utilisateur clique sur "Oui", supprimez l'auteur
                 if (result == DialogResult.Yes)
                 {
-
-                    try
+                    if (!editeurManager.LivreAssocie(Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["ID_editeur"].Value)))
                     {
-                        string query = "DELETE FROM Editeur WHERE ID_editeur=@id;";
+                        if (!editeurManager.CommandeAssociee(Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["ID_editeur"].Value)))
+                        {
+                            try
+                            {
+                                int idEditeur = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["ID_editeur"].Value);
+                                int nbRow = editeurManager.SupprimerEditeur(idEditeur);
 
-                        // Définissez les paramètres
-                        SqlParameter[] parameters = {
-                            new SqlParameter("@id", SqlDbType.VarChar) { Value = dataGridView1.SelectedRows[0].Cells["ID_editeur"].Value.ToString() }
-                        };
-
-                        connexion.EnvoyerDonnees(query, parameters);
-
-                        MessageBox.Show("L'éditeur a bien été supprimé.", "Suppression réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        AfficherEditeurs();
+                                if (nbRow > 0)
+                                {
+                                    MessageBox.Show("L'éditeur a bien été supprimé.", "Suppression réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    AfficherEditeurs();
+                                }
+                                else { MessageBox.Show("Erreur lors de la suppression de l'éditeur : Aucune ligne n'a été supprimée", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                            }
+                            catch (Exception ex) { MessageBox.Show("Erreur lors de la suppression de l'éditeur : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                        }
+                        else { MessageBox.Show("Impossible de supprimer l'éditeur car il est associé à une ou plusieurs commandes", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Erreur lors de la suppression de l'éditeur : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    else { MessageBox.Show("Impossible de supprimer l'éditeur car il est associé à un ou plusieurs livres", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
                 }
             }
+            else { MessageBox.Show("Veuillez sélectionner une ligne", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
     }
 }

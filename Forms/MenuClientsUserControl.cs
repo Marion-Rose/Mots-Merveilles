@@ -1,4 +1,5 @@
 ﻿using Mots_Merveilles.Managers;
+using Mots_Merveilles.Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,39 +8,72 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Mots_Merveilles.Forms
 {
+    /// <summary>
+    /// Controle utilisateur pour la gestion des clients
+    /// </summary>
     public partial class MenuClientsUserControl : UserControl
     {
-        ConnexionManager connexion;
+        private ClientManager clientManager;
+
+        /// <summary>
+        /// Constructeur de la classe MenuClientsUserControl
+        /// </summary>
         public MenuClientsUserControl()
         {
             InitializeComponent();
-            connexion = new ConnexionManager();
+            this.clientManager = new ClientManager();
+            this.Load += MenuClientsUserControl_Load;
+        }
+
+        /// <summary>
+        /// Chargement du formulaire
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuClientsUserControl_Load(object sender, EventArgs e)
+        {
             AfficherClients();
         }
 
+        /// <summary>
+        /// Affiche les clients dans le dataGridView
+        /// </summary>
         private void AfficherClients()
         {
-            string query = "SELECT * FROM Client; ";
-            dataGridView1.DataSource = connexion.RecupererDonnees(query);
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;// Ajustez la largeur des colonnes pour remplir la grille
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;//Sélectionnez toute la ligne au lieu d'une cellule
-            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Tan;// Changez la couleur des en-têtes de colonnes
-            dataGridView1.EnableHeadersVisualStyles = false;//Annule le style par défaut des en-têtes de colonnes
-            dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.FloralWhite;// Changez la couleur des lignes alternatives
-            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Tan;// Changez la couleur de fond de la ligne sélectionnée
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;// Ajustez la largeur des colonnes à leur contenu
+            List<Client> listeClients = clientManager.RecupererListeClient();
+            dataGridView1.Rows.Clear();
+            if (dataGridView1.Columns.Count == 0)
+            {
+                dataGridView1.Columns.Add("ID_client", "ID");
+                dataGridView1.Columns.Add("Nom", "Nom");
+                dataGridView1.Columns.Add("Prénom", "Prénom");
+                dataGridView1.Columns.Add("Date de naissance", "Date de naissance");
+                dataGridView1.Columns.Add("Sexe", "Sexe");
+                dataGridView1.Columns.Add("Adresse", "Adresse");
+                dataGridView1.Columns.Add("Code postal", "Code postal");
+                dataGridView1.Columns.Add("Ville", "Ville");
+                dataGridView1.Columns.Add("Téléphone", "Téléphone");
+                dataGridView1.Columns.Add("Mail", "Mail");
+            }
+
+            foreach (Client client in listeClients)
+            {
+                dataGridView1.Rows.Add(client.GetIdClient(), client.GetNom(), client.GetPrenom(), client.GetDateNaissance().ToShortDateString(), client.GetSexe(), client.GetAdresse(), client.GetCodePostal(), client.GetVille(), client.GetTelephone(), client.GetEmail());
+            }
+
         }
 
-        private void lbTitre_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// Gestion du bouton créer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btCreer_Click(object sender, EventArgs e)
         {
             CRClient Obj = new CRClient(true);
@@ -48,6 +82,11 @@ namespace Mots_Merveilles.Forms
             AfficherClients();
         }
 
+        /// <summary>
+        /// Gestion du bouton modifier
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btModifier_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
@@ -63,30 +102,30 @@ namespace Mots_Merveilles.Forms
             }
         }
 
+        /// <summary>
+        /// Gestions du bouton supprimer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btSupprimer_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                // Affichez une boîte de dialogue de confirmation
                 DialogResult result = MessageBox.Show("Êtes-vous sûr de vouloir supprimer le client : " + dataGridView1.SelectedRows[0].Cells[1].Value + " " + dataGridView1.SelectedRows[0].Cells[2].Value, "Confirmation de suppression", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                // Si l'utilisateur clique sur "Oui", supprimez l'auteur
                 if (result == DialogResult.Yes)
                 {
-
                     try
                     {
-                        string query = "DELETE FROM Client WHERE ID_client=@id;";
+                        int idClient = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["ID_client"].Value);
+                        int nbRows = clientManager.SupprimerClient(idClient);
 
-                        // Définissez les paramètres
-                        SqlParameter[] parameters = {
-                            new SqlParameter("@id", SqlDbType.VarChar) { Value = dataGridView1.SelectedRows[0].Cells["ID_client"].Value.ToString() }
-                        };
-
-                        connexion.EnvoyerDonnees(query, parameters);
-
-                        MessageBox.Show("Le client a bien été supprimé.", "Suppression réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        AfficherClients();
+                        if (nbRows > 0)
+                        {
+                            MessageBox.Show("Le client a bien été supprimé.", "Suppression réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            AfficherClients();
+                        }
+                        else { MessageBox.Show("Erreur lors de la suppression du livre : Aucune ligne n'a été supprimée", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
                     }
                     catch (Exception ex)
                     {

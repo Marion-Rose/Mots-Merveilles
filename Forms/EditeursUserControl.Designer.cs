@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             dataGridView1 = new DataGridView();
             btSupprimer = new Button();
             btModifier = new Button();
@@ -48,14 +48,14 @@
             // 
             dataGridView1.BackgroundColor = SystemColors.Control;
             dataGridView1.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Control;
-            dataGridViewCellStyle2.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = Color.Transparent;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = Color.Transparent;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(54, 222);
             dataGridView1.Margin = new Padding(2, 3, 2, 3);
@@ -125,6 +125,7 @@
             txtAdresse.Name = "txtAdresse";
             txtAdresse.Size = new Size(284, 27);
             txtAdresse.TabIndex = 17;
+            txtAdresse.TextChanged += txtBox_TextChanged;
             // 
             // lbNomEditeur
             // 
@@ -145,6 +146,7 @@
             txtNomEditeur.Name = "txtNomEditeur";
             txtNomEditeur.Size = new Size(219, 27);
             txtNomEditeur.TabIndex = 15;
+            txtNomEditeur.TextChanged += txtBox_TextChanged;
             // 
             // lbMail
             // 
@@ -165,6 +167,7 @@
             txtMail.Name = "txtMail";
             txtMail.Size = new Size(284, 27);
             txtMail.TabIndex = 25;
+            txtMail.TextChanged += txtBox_TextChanged;
             // 
             // lbTelephone
             // 
@@ -185,6 +188,7 @@
             txtTelephone.Name = "txtTelephone";
             txtTelephone.Size = new Size(219, 27);
             txtTelephone.TabIndex = 23;
+            txtTelephone.TextChanged += txtBox_TextChanged;
             // 
             // EditeursUserControl
             // 

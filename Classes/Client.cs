@@ -14,7 +14,7 @@ namespace Mots_Merveilles.Classes
         private int idClient;
         private string nom;
         private string prenom;
-        private DateOnly dateNaissance;
+        private DateTime dateNaissance;
         private string sexe;
         private string adresse;
         private string codePostal;
@@ -35,7 +35,7 @@ namespace Mots_Merveilles.Classes
         /// <param name="ville"></param>
         /// <param name="telephone"></param>
         /// <param name="email"></param>
-        public Client(int idClient, string nom, string prenom, DateOnly dateNaissance, string sexe, string adresse, string codePostal, string ville, string telephone, string email)
+        public Client(int idClient, string nom, string prenom, DateTime dateNaissance, string sexe, string adresse, string codePostal, string ville, string telephone, string email)
         {
             this.idClient = idClient;
             this.nom = nom;
@@ -48,15 +48,14 @@ namespace Mots_Merveilles.Classes
             this.telephone = telephone;
             this.email = email;
         }
-
         public void SetIdClient(int idClient) { this.idClient = idClient; }
         public int GetIdClient() { return this.idClient;}
         public void SetNom(string nom) { this.nom = nom;}
         public string GetNom() { return this.nom;}   
         public void SetPrenom(string prenom) { this.prenom = prenom;}
         public string GetPrenom() { return this.prenom;}
-        public void SetDateNaissance(DateOnly dateNaissance) { this.dateNaissance = dateNaissance;}
-        public DateOnly GetDateNaissance() { return this.dateNaissance;}
+        public void SetDateNaissance(DateTime dateNaissance) { this.dateNaissance = dateNaissance;}
+        public DateTime GetDateNaissance() { return this.dateNaissance;}
         public void SetSexe(string sexe) { this.sexe = sexe;}
         public string GetSexe() { return this.sexe;}
         public void SetAdresse(string adresse) { this.adresse = adresse;}

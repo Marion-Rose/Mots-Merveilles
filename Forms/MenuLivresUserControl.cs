@@ -1,4 +1,5 @@
 ﻿using Mots_Merveilles.Managers;
+using Mots_Merveilles.Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,38 +8,70 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Mots_Merveilles.Forms
 {
+    /// <summary>
+    /// Controle utilisateur pour la gestion des livres
+    /// </summary>
     public partial class MenuLivresUserControl : UserControl
     {
-        ConnexionManager connexion;
+        private LivreManager livreManager;
+
+        /// <summary>
+        /// Constructeur de la classe MenuLivresUserControl
+        /// </summary>
         public MenuLivresUserControl()
         {
             InitializeComponent();
-            connexion = new ConnexionManager();
+            this.livreManager = new LivreManager();
+            this.Load += MenuLivresUserControl_Load;
+        }
+
+        /// <summary>
+        /// Chargement du formulaire
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuLivresUserControl_Load(object sender, EventArgs e)
+        {
             AfficherLivres();
         }
 
+        /// <summary>
+        /// Affiche les livres dans le dataGridView
+        /// </summary>
         private void AfficherLivres()
         {
-            string query = "SELECT l.ID_livre, l.titre, CONCAT(a.nom, ' ', a.prenom) AS auteur, e.nom AS editeur, l.ISBN, t.type AS type, l.prix, l.quantite " +
-                "FROM Livre l " +
-                "INNER JOIN Auteur a ON l.ID_auteur = a.ID_auteur " +
-                "INNER JOIN Editeur e ON l.ID_editeur = e.ID_editeur " +
-                "INNER JOIN TypeLivre t ON l.ID_type = t.ID_type;";
-            dataGridView1.DataSource = connexion.RecupererDonnees(query);
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;// Ajustez la largeur des colonnes pour remplir la grille
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;//Sélectionnez toute la ligne au lieu d'une cellule
-            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Tan;// Changez la couleur des en-têtes de colonnes
-            dataGridView1.EnableHeadersVisualStyles = false;//Annule le style par défaut des en-têtes de colonnes
-            dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.FloralWhite;// Changez la couleur des lignes alternatives
-            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Tan;// Changez la couleur de fond de la ligne sélectionnée
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;// Ajustez la largeur des colonnes à leur contenu
+            List<Livre> listeLivres = livreManager.RecupererListeLivre();
+            dataGridView1.Rows.Clear();
+            if (dataGridView1.Columns.Count == 0)
+            {
+                dataGridView1.Columns.Add("ID_livre", "ID");
+                dataGridView1.Columns.Add("Titre", "Titre");
+                dataGridView1.Columns.Add("Auteur", "Auteur");
+                dataGridView1.Columns.Add("Editeur", "Editeur");
+                dataGridView1.Columns.Add("ISBN", "ISBN");
+                dataGridView1.Columns.Add("Type", "Type");
+                dataGridView1.Columns.Add("Prix", "Prix");
+                dataGridView1.Columns.Add("Quantite", "Quantité");
+                dataGridView1.Columns["Prix"].DefaultCellStyle.Format = "0.00";
+            }
+
+            foreach (Livre livre in listeLivres)
+            {
+                dataGridView1.Rows.Add(livre.GetIdLivre(), livre.GetTitre(), livre.GetAuteur().ToString(), livre.GetEditeur().GetNom(), livre.GetIsbn(), livre.GetType().GetLibelle(), livre.GetPrix(), livre.GetQuantite());
+            }
         }
 
+        /// <summary>
+        /// Gestion du bouton créer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btCreer_Click(object sender, EventArgs e)
         {
             CRLivre Obj = new CRLivre(true);
@@ -47,6 +80,11 @@ namespace Mots_Merveilles.Forms
             AfficherLivres();
         }
 
+        /// <summary>
+        /// Gestion du bouton modifier
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btModifier_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
@@ -62,35 +100,43 @@ namespace Mots_Merveilles.Forms
             }
         }
 
+        /// <summary>
+        /// Gestion du bouton supprimer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btSupprimer_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                // Affichez une boîte de dialogue de confirmation
                 DialogResult result = MessageBox.Show("Êtes-vous sûr de vouloir supprimer le livre : " + dataGridView1.SelectedRows[0].Cells[1].Value, "Confirmation de suppression", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                // Si l'utilisateur clique sur "Oui", supprimez l'auteur
                 if (result == DialogResult.Yes)
                 {
-
-                    try
+                    if (!livreManager.CommandeAssociee(Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["ID_livre"].Value)))
                     {
-                        string query = "DELETE FROM Livre WHERE ID_livre=@id;";
+                        try
+                        {
+                            int idLivre = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["ID_livre"].Value);
+                            int nbRows = livreManager.SupprimerLivre(idLivre);
 
-                        // Définissez les paramètres
-                        SqlParameter[] parameters = {
-                            new SqlParameter("@id", SqlDbType.VarChar) { Value = dataGridView1.SelectedRows[0].Cells["ID_livre"].Value.ToString() }
-                        };
-
-                        connexion.EnvoyerDonnees(query, parameters);
-
-                        MessageBox.Show("Le livre a bien été supprimé.", "Suppression réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        AfficherLivres();
+                            if (nbRows > 0)
+                            {
+                                MessageBox.Show("Le livre a bien été supprimé.", "Suppression réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                AfficherLivres();
+                            }
+                            else { MessageBox.Show("Erreur lors de la suppression du livre : Aucune ligne n'a été supprimée", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Erreur lors de la suppression du livre : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        MessageBox.Show("Erreur lors de la suppression du livre : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Impossible de supprimer le livre : une commande est associée à ce livre", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+
                 }
             }
         }

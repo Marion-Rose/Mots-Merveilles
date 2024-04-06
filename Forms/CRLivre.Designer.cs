@@ -44,6 +44,7 @@
             txtQuantite = new TextBox();
             btModifier = new Button();
             btCreer = new Button();
+            label1 = new Label();
             SuspendLayout();
             // 
             // lbAuteur
@@ -89,7 +90,7 @@
             // 
             comboBoxEditeur.Font = new Font("Copperplate Gothic Light", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxEditeur.FormattingEnabled = true;
-            comboBoxEditeur.Location = new Point(124, 81);
+            comboBoxEditeur.Location = new Point(124, 89);
             comboBoxEditeur.Name = "comboBoxEditeur";
             comboBoxEditeur.Size = new Size(271, 28);
             comboBoxEditeur.TabIndex = 17;
@@ -98,7 +99,7 @@
             // 
             lbEditeur.AutoSize = true;
             lbEditeur.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lbEditeur.Location = new Point(18, 83);
+            lbEditeur.Location = new Point(18, 91);
             lbEditeur.Name = "lbEditeur";
             lbEditeur.Size = new Size(92, 21);
             lbEditeur.TabIndex = 16;
@@ -108,7 +109,7 @@
             // 
             lbISBN.AutoSize = true;
             lbISBN.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lbISBN.Location = new Point(469, 84);
+            lbISBN.Location = new Point(469, 92);
             lbISBN.Name = "lbISBN";
             lbISBN.Size = new Size(64, 21);
             lbISBN.TabIndex = 19;
@@ -119,7 +120,7 @@
             txtIsbn.BackColor = Color.White;
             txtIsbn.BorderStyle = BorderStyle.FixedSingle;
             txtIsbn.Font = new Font("Copperplate Gothic Light", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            txtIsbn.Location = new Point(547, 83);
+            txtIsbn.Location = new Point(547, 91);
             txtIsbn.Name = "txtIsbn";
             txtIsbn.Size = new Size(271, 27);
             txtIsbn.TabIndex = 18;
@@ -128,7 +129,7 @@
             // 
             comboBoxType.Font = new Font("Copperplate Gothic Light", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxType.FormattingEnabled = true;
-            comboBoxType.Location = new Point(124, 131);
+            comboBoxType.Location = new Point(123, 153);
             comboBoxType.Name = "comboBoxType";
             comboBoxType.Size = new Size(271, 28);
             comboBoxType.TabIndex = 21;
@@ -137,7 +138,7 @@
             // 
             lbType.AutoSize = true;
             lbType.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lbType.Location = new Point(52, 133);
+            lbType.Location = new Point(51, 155);
             lbType.Name = "lbType";
             lbType.Size = new Size(58, 21);
             lbType.TabIndex = 20;
@@ -147,7 +148,7 @@
             // 
             lbPrix.AutoSize = true;
             lbPrix.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lbPrix.Location = new Point(434, 130);
+            lbPrix.Location = new Point(433, 152);
             lbPrix.Name = "lbPrix";
             lbPrix.Size = new Size(53, 21);
             lbPrix.TabIndex = 23;
@@ -158,16 +159,17 @@
             txtPrix.BackColor = Color.White;
             txtPrix.BorderStyle = BorderStyle.FixedSingle;
             txtPrix.Font = new Font("Copperplate Gothic Light", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            txtPrix.Location = new Point(493, 129);
+            txtPrix.Location = new Point(492, 151);
             txtPrix.Name = "txtPrix";
             txtPrix.Size = new Size(109, 27);
             txtPrix.TabIndex = 22;
+            txtPrix.TextChanged += txtBox_TextChanged;
             // 
             // lbQuantite
             // 
             lbQuantite.AutoSize = true;
             lbQuantite.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lbQuantite.Location = new Point(627, 134);
+            lbQuantite.Location = new Point(626, 156);
             lbQuantite.Name = "lbQuantite";
             lbQuantite.Size = new Size(106, 21);
             lbQuantite.TabIndex = 25;
@@ -178,7 +180,7 @@
             txtQuantite.BackColor = Color.White;
             txtQuantite.BorderStyle = BorderStyle.FixedSingle;
             txtQuantite.Font = new Font("Copperplate Gothic Light", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            txtQuantite.Location = new Point(739, 132);
+            txtQuantite.Location = new Point(738, 154);
             txtQuantite.Name = "txtQuantite";
             txtQuantite.Size = new Size(109, 27);
             txtQuantite.TabIndex = 24;
@@ -188,7 +190,7 @@
             btModifier.BackColor = Color.Tan;
             btModifier.FlatStyle = FlatStyle.Flat;
             btModifier.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btModifier.Location = new Point(345, 187);
+            btModifier.Location = new Point(344, 209);
             btModifier.Name = "btModifier";
             btModifier.Size = new Size(181, 49);
             btModifier.TabIndex = 27;
@@ -201,7 +203,7 @@
             btCreer.BackColor = Color.Tan;
             btCreer.FlatStyle = FlatStyle.Flat;
             btCreer.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btCreer.Location = new Point(345, 187);
+            btCreer.Location = new Point(344, 209);
             btCreer.Name = "btCreer";
             btCreer.Size = new Size(181, 49);
             btCreer.TabIndex = 26;
@@ -209,12 +211,23 @@
             btCreer.UseVisualStyleBackColor = false;
             btCreer.Click += btCreer_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Copperplate Gothic Light", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(547, 121);
+            label1.Name = "label1";
+            label1.Size = new Size(162, 14);
+            label1.TabIndex = 28;
+            label1.Text = "*13 chiffres attendus";
+            // 
             // CRLivre
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FloralWhite;
-            ClientSize = new Size(870, 267);
+            BackColor = SystemColors.Control;
+            ClientSize = new Size(870, 291);
+            Controls.Add(label1);
             Controls.Add(btModifier);
             Controls.Add(btCreer);
             Controls.Add(lbQuantite);
@@ -256,5 +269,6 @@
         private TextBox txtQuantite;
         private Button btModifier;
         private Button btCreer;
+        private Label label1;
     }
 }

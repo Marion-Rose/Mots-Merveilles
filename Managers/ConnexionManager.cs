@@ -16,16 +16,9 @@ namespace Mots_Merveilles.Managers
         private SqlConnection connexion; //Connexion à la base de données
         private SqlCommand cmd; //Commande SQL à éxécuter
         private DataTable dt;//Tableau de données, où seront stockées les données récupérées
-#pragma warning disable CS0169 // Le champ 'ConnexionManager.sda' n'est jamais utilisé
         private SqlDataAdapter sda;//transforme les données SQL en données C#
-#pragma warning restore CS0169 // Le champ 'ConnexionManager.sda' n'est jamais utilisé
         private string strConnection;//stocke la chaine de connexion à la base de données
-
-#pragma warning disable CS8618 // Un champ non-nullable doit contenir une valeur non-null lors de la fermeture du constructeur. Envisagez de déclarer le champ comme nullable.
-#pragma warning disable CS8618 // Un champ non-nullable doit contenir une valeur non-null lors de la fermeture du constructeur. Envisagez de déclarer le champ comme nullable.
         public ConnexionManager() //Constructeur
-#pragma warning restore CS8618 // Un champ non-nullable doit contenir une valeur non-null lors de la fermeture du constructeur. Envisagez de déclarer le champ comme nullable.
-#pragma warning restore CS8618 // Un champ non-nullable doit contenir une valeur non-null lors de la fermeture du constructeur. Envisagez de déclarer le champ comme nullable.
         {
             this.strConnection = "Data Source=PC-MARION\\SQLEXPRESS;Initial Catalog=library;Integrated Security=True";
             this.connexion = new SqlConnection(strConnection);
@@ -34,17 +27,26 @@ namespace Mots_Merveilles.Managers
         //    this.strConnection = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString;
         }
 
-        public DataTable RecupererDonnees(string query)
+        public DataTable RecupererDonnees(string query, SqlParameter[]? parameters = null)
         {
-            dt = new DataTable();
+            DataTable dt = new DataTable();
+
             using (SqlConnection connection = new SqlConnection(strConnection))
             {
                 try
                 {
-                    using (SqlDataAdapter sda = new SqlDataAdapter(query, connection))
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
-                        connection.Open();
-                        sda.Fill(dt);
+                        if (parameters != null)
+                        {
+                            cmd.Parameters.AddRange(parameters);
+                        }
+
+                        using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                        {
+                            connection.Open();
+                            sda.Fill(dt);
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -52,8 +54,8 @@ namespace Mots_Merveilles.Managers
                     MessageBox.Show("Erreur lors de la récupération des données : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+
             return dt;
-        
         }
 
         public int EnvoyerDonnees(string query, SqlParameter[] parameters)

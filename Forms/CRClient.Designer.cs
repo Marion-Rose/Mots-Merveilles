@@ -63,6 +63,7 @@
             // 
             txtVille.BackColor = Color.White;
             txtVille.BorderStyle = BorderStyle.FixedSingle;
+            txtVille.CharacterCasing = CharacterCasing.Upper;
             txtVille.Location = new Point(142, 232);
             txtVille.Name = "txtVille";
             txtVille.Size = new Size(210, 29);
@@ -120,6 +121,7 @@
             txtPrenom.Name = "txtPrenom";
             txtPrenom.Size = new Size(210, 29);
             txtPrenom.TabIndex = 63;
+            txtPrenom.TextChanged += txtBox_TextChanged;
             // 
             // lbMail
             // 
@@ -138,6 +140,7 @@
             txtMail.Name = "txtMail";
             txtMail.Size = new Size(271, 29);
             txtMail.TabIndex = 61;
+            txtMail.TextChanged += txtBox_TextChanged;
             // 
             // lbTelephone
             // 
@@ -242,7 +245,7 @@
             // 
             AutoScaleDimensions = new SizeF(14F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FloralWhite;
+            BackColor = SystemColors.Control;
             ClientSize = new Size(871, 368);
             Controls.Add(btModifier);
             Controls.Add(btCreer);
