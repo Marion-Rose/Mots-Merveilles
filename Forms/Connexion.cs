@@ -17,6 +17,7 @@ namespace Mots_Merveilles.Forms
         public Connexion()
         {
             InitializeComponent();
+            MessageBox.Show("Voici les utilisateurs enregistrés : \nm.tulipe m.tulipe Administrateur\nj.dubois j.dubois Manageur\nm.martin m.martin Employé");
         }
 
         private void btConnexion_Click(object sender, EventArgs e)
