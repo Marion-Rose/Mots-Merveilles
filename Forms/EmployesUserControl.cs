@@ -209,6 +209,7 @@ namespace Mots_Merveilles.Forms
                     try
                     {
                         int idEmploye = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["ID_employe"].Value);
+                        if (employeManager.EmployeUtilisateur(idEmploye)) { MessageBox.Show("Impossible de supprimer l'employé car il est lié à un utilisateur", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
                         int lignesSupprimees = employeManager.SupprimerEmploye(idEmploye);
 
                         if (lignesSupprimees > 0)

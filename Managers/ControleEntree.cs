@@ -7,8 +7,16 @@ using System.Threading.Tasks;
 
 namespace Mots_Merveilles.Managers
 {
+    /// <summary>
+    /// Classe permettant de contrôler les entrées de l'utilisateur
+    /// </summary>
     public class ControleEntree
     {
+        /// <summary>
+        /// Méthode permettant de formater un texte en nom propre
+        /// </summary>
+        /// <param name="entree"></param>
+        /// <returns>Nom propre</returns>
         public static string FormaterTexteNom(string entree)
         {
             if (string.IsNullOrEmpty(entree))
@@ -18,6 +26,11 @@ namespace Mots_Merveilles.Managers
             return char.ToUpper(entree[0]) + entree.Substring(1).ToLower();
         }
 
+        /// <summary>
+        /// Méthode permettant de formater un texte de prix pour uniformiser la virgule
+        /// </summary>
+        /// <param name="entree"></param>
+        /// <returns>Prix sous forme de texte avec virgule</returns>
         public static string FormaterTextePrix(string entree)
         {
             if (string.IsNullOrEmpty(entree))
@@ -27,6 +40,11 @@ namespace Mots_Merveilles.Managers
             return entree.Replace(".", ",");
         }
 
+        /// <summary>
+        /// Méthode permettant de vérifier les texte de type nom
+        /// </summary>
+        /// <param name="entree"></param>
+        /// <returns>Vrai si le texte est conforme</returns>
         public static bool VerifierTexteNom(string entree)
         {
             //séquence d'un ou plusieurs caractères alphabétiques, apostrophes, espaces ou tirets
@@ -34,6 +52,11 @@ namespace Mots_Merveilles.Managers
             return regex.IsMatch(entree);
         }
 
+        /// <summary>
+        /// Méthode permettant de vérifier les texte de type e-mail
+        /// </summary>
+        /// <param name="entree"></param>
+        /// <returns>Vrai si l'adresse est conforme</returns>
         public static bool VerifierTexteMail(string entree)
         {
             //séquence d'un ou plusieurs caractères alphanumériques, points ou tirets + @ + séquence d'un ou plusieurs caractères alphanumériques ou tirets + point + séquence de 2 ou 3 caractères alphanumériques
@@ -41,6 +64,11 @@ namespace Mots_Merveilles.Managers
             return regex.IsMatch(entree);
         }
 
+        /// <summary>
+        /// Méthode permettant de vérifier les texte de type téléphone
+        /// </summary>
+        /// <param name="entree"></param>
+        /// <returns>Vrai si le téléphone est conforme</returns>
         public static bool VerifierTexteTelephone(string entree)
         {
             //séquence de 10 chiffres
@@ -48,6 +76,11 @@ namespace Mots_Merveilles.Managers
             return regex.IsMatch(entree);
         }
 
+        /// <summary>
+        /// Méthode permettant de vérifier les texte de type prix
+        /// </summary>
+        /// <param name="entree"></param>
+        /// <returns>Vrai si le prix est conforme</returns>
         public static bool VerifierTextePrix(string entree)
         {
             //séquence de chiffres, point et virgule
@@ -55,6 +88,11 @@ namespace Mots_Merveilles.Managers
             return regex.IsMatch(entree);
         }
 
+        /// <summary>
+        /// Méthode permettant de vérifier les texte de type quantité
+        /// </summary>
+        /// <param name="entree"></param>
+        /// <returns>Vrai si la quantité est conforme</returns>
         public static bool VerifierTexteQuantite(string entree)
         {
             //séquence de chiffres
@@ -62,6 +100,11 @@ namespace Mots_Merveilles.Managers
             return regex.IsMatch(entree);
         }
 
+        /// <summary>
+        /// Méthode permettant de vérifier les texte de type ISBN
+        /// </summary>
+        /// <param name="entree"></param>
+        /// <returns>Vrai si l'ISBN est conforme</returns>
         public static bool VerifierIsbn(string entree)
         {
             //séquence de 13 chiffres
@@ -69,6 +112,11 @@ namespace Mots_Merveilles.Managers
             return regex.IsMatch(entree);
         }
 
+        /// <summary>
+        /// Méthode permettant de vérifier les texte de type code postal
+        /// </summary>
+        /// <param name="entree"></param>
+        /// <returns>Vrai si le code postal est conforme</returns>
         public static bool VerifierCodePostal(string entree)
         {
             //séquence de 5 chiffres

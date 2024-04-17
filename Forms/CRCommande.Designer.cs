@@ -142,6 +142,7 @@
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(271, 27);
             dateTimePicker1.TabIndex = 3;
+            dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
             // 
             // comboBoxStatut
             // 
@@ -153,6 +154,7 @@
             comboBoxStatut.Name = "comboBoxStatut";
             comboBoxStatut.Size = new Size(271, 28);
             comboBoxStatut.TabIndex = 4;
+            comboBoxStatut.SelectedIndexChanged += comboBoxStatut_SelectedIndexChanged;
             // 
             // lbLivres
             // 

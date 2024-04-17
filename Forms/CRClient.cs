@@ -126,19 +126,7 @@ namespace Mots_Merveilles.Forms
             }
             else
             {
-                if (txtNom.Text == "") { MessageBox.Show("Veuillez remplir le nom", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (txtPrenom.Text == "") { MessageBox.Show("Veuillez remplir le prénom", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (txtAdresse.Text == "") { MessageBox.Show("Veuillez remplir l'adresse", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (txtCP.Text == "") { MessageBox.Show("Veuillez remplir le code postal", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (txtVille.Text == "") { MessageBox.Show("Veuillez remplir la ville", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (txtTelephone.Text == "") { MessageBox.Show("Veuillez remplir le numéro de téléphone", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (txtMail.Text == "") { MessageBox.Show("Veuillez remplir l'adresse mail", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (!ControleEntree.VerifierCodePostal(txtCP.Text)) { MessageBox.Show("Le code postal doit être composé de 5 chiffres", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (!ControleEntree.VerifierTexteNom(txtNom.Text)) { MessageBox.Show("Le nom ne doit contenir que des lettres, des espaces, des tirets et des apostrophes", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (!ControleEntree.VerifierTexteNom(txtPrenom.Text)) { MessageBox.Show("Le prénom ne doit contenir que des lettres, des espaces, des tirets et des apostrophes", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (!ControleEntree.VerifierTexteNom(txtVille.Text)) { MessageBox.Show("La ville ne doit contenir que des lettres, des espaces, des tirets et des apostrophes", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (!ControleEntree.VerifierTexteTelephone(txtTelephone.Text)) { MessageBox.Show("Le numéro de téléphone doit être composé de 10 chiffres", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (!ControleEntree.VerifierTexteMail(txtMail.Text)) { MessageBox.Show("L'adresse mail doit être sous la forme :"); }
+                MessageBox.Show("Veuillez remplir correctement tous les champs", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -177,20 +165,8 @@ namespace Mots_Merveilles.Forms
                 catch (Exception ex) { MessageBox.Show("Erreur lors de la modification du client : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);}
             }
             else
-            { 
-                if (txtNom.Text == "")  { MessageBox.Show("Veuillez remplir le nom", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (txtPrenom.Text == "") { MessageBox.Show("Veuillez remplir le prénom", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (txtAdresse.Text == "") { MessageBox.Show("Veuillez remplir l'adresse", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (txtCP.Text == "") { MessageBox.Show("Veuillez remplir le code postal", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (txtVille.Text == "") { MessageBox.Show("Veuillez remplir la ville", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (txtTelephone.Text == "") { MessageBox.Show("Veuillez remplir le numéro de téléphone", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (txtMail.Text == "") { MessageBox.Show("Veuillez remplir l'adresse mail", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (ControleEntree.VerifierCodePostal(txtCP.Text) == false) { MessageBox.Show("Le code postal doit être composé de 5 chiffres", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);}
-                if (ControleEntree.VerifierTexteNom(txtNom.Text) == false) { MessageBox.Show("Le nom ne doit contenir que des lettres, des espaces, des tirets et des apostrophes", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);}
-                if (ControleEntree.VerifierTexteNom(txtPrenom.Text) == false) { MessageBox.Show("Le prénom ne doit contenir que des lettres, des espaces, des tirets et des apostrophes", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);}
-                if (ControleEntree.VerifierTexteNom(txtVille.Text) == false) { MessageBox.Show("La ville ne doit contenir que des lettres, des espaces, des tirets et des apostrophes", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);}
-                if (ControleEntree.VerifierTexteTelephone(txtTelephone.Text) == false) { MessageBox.Show("Le numéro de téléphone doit être composé de 10 chiffres", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);}
-                if (ControleEntree.VerifierTexteMail(txtMail.Text) == false) { MessageBox.Show("L'adresse mail doit être sous la forme :"); }
+            {
+                MessageBox.Show("Veuillez remplir correctement tous les champs", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

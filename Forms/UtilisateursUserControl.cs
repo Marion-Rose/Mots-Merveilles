@@ -111,7 +111,6 @@ namespace Mots_Merveilles.Forms
             if (this.utilisateurSelectionne != null)
             {
                 txtIdentifiant.Text = this.utilisateurSelectionne.GetIdentifiant();
-                txtMDP.Text = this.utilisateurSelectionne.GetMotDePasse();
                 checkBoxActif.Checked = this.utilisateurSelectionne.GetEstActif();
                 comboBoxGroupe.Text = this.utilisateurSelectionne.GetGroupe().GetNom();
             }

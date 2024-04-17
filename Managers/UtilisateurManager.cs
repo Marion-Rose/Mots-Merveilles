@@ -76,14 +76,18 @@ namespace Mots_Merveilles.Managers
         /// <returns>Nombre de lignes insérées</returns>
         public int CreerUtilisateur(Utilisateur utilisateur)
         {
-            string query = "INSERT INTO Utilisateur (ID_employe, identifiant, mot_de_passe, est_actif, groupe) VALUES (@ID_employe, @identifiant, @mot_de_passe, @est_actif, @ID_groupe);";
+            string sel = Convert.ToBase64String(HashageMotDePasse.GenererSel()); // Générer un sel aléatoire
+            string motDePasseHashe = HashageMotDePasse.HasherMotDePasse(utilisateur.GetMotDePasse(), sel); // Hacher le mot de passe
+
+            string query = "INSERT INTO Utilisateur (ID_employe, identifiant, mot_de_passe, est_actif, groupe, sel) VALUES (@ID_employe, @identifiant, @mot_de_passe, @est_actif, @ID_groupe, @sel);";
             SqlParameter[] parameters =
             {
                 new SqlParameter("@ID_employe", SqlDbType.Int) { Value = utilisateur.GetEmploye().GetIdEmploye() },
                 new SqlParameter("@identifiant", SqlDbType.VarChar) { Value = utilisateur.GetIdentifiant() },
-                new SqlParameter("@mot_de_passe", SqlDbType.VarChar) { Value = utilisateur.GetMotDePasse() },
+                new SqlParameter("@mot_de_passe", SqlDbType.VarChar) { Value = motDePasseHashe },
                 new SqlParameter("@est_actif", SqlDbType.Bit) { Value = utilisateur.GetEstActif() },
-                new SqlParameter("@ID_groupe", SqlDbType.Int) { Value = utilisateur.GetGroupe().GetIdGroupeUtilisateur() }
+                new SqlParameter("@ID_groupe", SqlDbType.Int) { Value = utilisateur.GetGroupe().GetIdGroupeUtilisateur() },
+                new SqlParameter("@sel", SqlDbType.VarChar) { Value = sel }
             };
 
             return connexion.EnvoyerDonnees(query, parameters);
@@ -96,15 +100,19 @@ namespace Mots_Merveilles.Managers
         /// <returns>Nombre de lignes modifiées</returns>
         public int ModifierUtilisateur(Utilisateur utilisateur)
         {
-            string query = "UPDATE Utilisateur SET ID_employe = @ID_employe, identifiant = @identifiant, mot_de_passe = @mot_de_passe, est_actif = @est_actif, groupe = @ID_groupe WHERE ID_utilisateur = @ID_utilisateur;";
+            string sel = Convert.ToBase64String(HashageMotDePasse.GenererSel()); // Générer un sel aléatoire
+            string motDePasseHashe = HashageMotDePasse.HasherMotDePasse(utilisateur.GetMotDePasse(), sel); // Hacher le mot de passe
+
+            string query = "UPDATE Utilisateur SET ID_employe = @ID_employe, identifiant = @identifiant, mot_de_passe = @mot_de_passe, est_actif = @est_actif, groupe = @ID_groupe, sel = @sel WHERE ID_utilisateur = @ID_utilisateur;";
             SqlParameter[] parameters =
             {
                 new SqlParameter("@ID_employe", SqlDbType.Int) { Value = utilisateur.GetEmploye().GetIdEmploye() },
                 new SqlParameter("@identifiant", SqlDbType.VarChar) { Value = utilisateur.GetIdentifiant() },
-                new SqlParameter("@mot_de_passe", SqlDbType.VarChar) { Value = utilisateur.GetMotDePasse() },
+                new SqlParameter("@mot_de_passe", SqlDbType.VarChar) { Value = motDePasseHashe },
                 new SqlParameter("@est_actif", SqlDbType.Bit) { Value = utilisateur.GetEstActif() },
                 new SqlParameter("@ID_groupe", SqlDbType.Int) { Value = utilisateur.GetGroupe().GetIdGroupeUtilisateur() },
-                new SqlParameter("@ID_utilisateur", SqlDbType.Int) { Value = utilisateur.GetID() }
+                new SqlParameter("@ID_utilisateur", SqlDbType.Int) { Value = utilisateur.GetID() },
+                new SqlParameter("@sel", SqlDbType.VarChar) { Value = sel }
             };
 
             return connexion.EnvoyerDonnees(query, parameters);

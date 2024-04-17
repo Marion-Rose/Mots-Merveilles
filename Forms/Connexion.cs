@@ -27,7 +27,13 @@ namespace Mots_Merveilles.Forms
                 Accueil home = new Accueil();
                 home.ShowDialog();
             }
-           
+
+        }
+
+        private void btReinitialiser_Click(object sender, EventArgs e)
+        {
+            txtIdentifiant.Text = "";
+            txtMDP.Text = "";
         }
     }
 }

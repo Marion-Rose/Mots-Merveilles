@@ -154,13 +154,7 @@ namespace Mots_Merveilles.Forms
             }
             else
             {
-                if (txtTitre.Text == "") { MessageBox.Show("Veuillez remplir le champ Titre", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (txtIsbn.Text == "") { MessageBox.Show("Veuillez remplir le champ ISBN", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (txtPrix.Text == "") { MessageBox.Show("Veuillez remplir le champ Prix", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (txtQuantite.Text == "") { MessageBox.Show("Veuillez remplir le champ Quantité", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (!ControleEntree.VerifierIsbn(txtIsbn.Text)) { MessageBox.Show("L'ISBN doit être composé de 13 chiffres", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (!ControleEntree.VerifierTextePrix(txtPrix.Text)) { MessageBox.Show("Le prix doit être un nombre décimal", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (!ControleEntree.VerifierTexteQuantite(txtQuantite.Text)) { MessageBox.Show("La quantité doit être un nombre entier", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                MessageBox.Show("Veuillez remplir correctement tous les champs", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -199,13 +193,7 @@ namespace Mots_Merveilles.Forms
             }
             else
             {
-                if (txtTitre.Text == "") { MessageBox.Show("Veuillez remplir le champ Titre", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (txtIsbn.Text == "") { MessageBox.Show("Veuillez remplir le champ ISBN", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (txtPrix.Text == "") { MessageBox.Show("Veuillez remplir le champ Prix", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (txtQuantite.Text == "") { MessageBox.Show("Veuillez remplir le champ Quantité", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (!ControleEntree.VerifierIsbn(txtIsbn.Text)) { MessageBox.Show("L'ISBN doit être composé de 13 chiffres", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (!ControleEntree.VerifierTextePrix(txtPrix.Text)) { MessageBox.Show("Le prix doit être un nombre décimal", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (!ControleEntree.VerifierTexteQuantite(txtQuantite.Text)) { MessageBox.Show("La quantité doit être un nombre entier", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                MessageBox.Show("Veuillez remplir correctement tous les champs", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
