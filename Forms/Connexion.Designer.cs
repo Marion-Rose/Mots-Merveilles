@@ -112,6 +112,7 @@
             btReinitialiser.TabIndex = 8;
             btReinitialiser.Text = "Réinitialiser";
             btReinitialiser.UseVisualStyleBackColor = false;
+            btReinitialiser.Click += btReinitialiser_Click;
             // 
             // Connexion
             // 

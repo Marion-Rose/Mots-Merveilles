@@ -113,7 +113,9 @@ namespace Mots_Merveilles.Managers
                 new SqlParameter("@dateCommande", SqlDbType.DateTime) { Value = commande.GetDateCommande() },
                 new SqlParameter("@statutCommande", SqlDbType.VarChar) { Value = commande.GetStatut() },
             };
-            int idCommande = Convert.ToInt32(connexion.EnvoyerDonnees(query, parameters));
+            nbRows = connexion.EnvoyerDonnees(query, parameters);
+
+            int idCommande = commande.GetIdCommande();
 
             string query2 = "INSERT INTO Ligne_Commande (ID_commande, ID_livre, quantite_commande) VALUES (@idCommande, @idLivre, @quantite);";
             foreach (KeyValuePair<Livre, int> ligneCommande in commande.GetLivresCommandes())
@@ -124,8 +126,8 @@ namespace Mots_Merveilles.Managers
                     new SqlParameter("@idLivre", SqlDbType.Int) { Value = ligneCommande.Key.GetIdLivre() },
                     new SqlParameter("@quantite", SqlDbType.Int) { Value = ligneCommande.Value },
                 };
-                connexion.EnvoyerDonnees(query2, parameters2);
-                nbRows++;
+                
+                nbRows = nbRows + connexion.EnvoyerDonnees(query2, parameters2);
             }
             return nbRows;
         }
@@ -136,13 +138,12 @@ namespace Mots_Merveilles.Managers
         /// <returns></returns>
         public int RecupererIdProchaineCommande()
         {
-            string query = "SELECT MAX(ID_commande) FROM Commande;";
-            DataTable dataTable = connexion.RecupererDonnees(query);
-            // Vérifie si la valeur retournée est DBNull ou null
-            object maxId = dataTable.Rows[0][0];
-            if (maxId != DBNull.Value && maxId != null)
+            string query = "SELECT IDENT_CURRENT('Commande') + IDENT_INCR('Commande');";
+            object result = connexion.RecupererDonnees(query).Rows[0][0];
+
+            if (result != DBNull.Value && result != null)
             {
-                return Convert.ToInt32(maxId) + 1;
+                return Convert.ToInt32(result);
             }
             else
             {

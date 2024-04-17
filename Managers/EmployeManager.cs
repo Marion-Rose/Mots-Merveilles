@@ -154,5 +154,18 @@ namespace Mots_Merveilles.Managers
 
             return dataTable.Rows.Count > 0;
         }
+
+        public bool EmployeUtilisateur(int idEmploye)
+        {
+            string query = "SELECT * FROM Utilisateur WHERE ID_employe = @idEmploye;";
+            SqlParameter[] parameters =
+            {
+                new SqlParameter("@idEmploye", SqlDbType.Int) { Value = idEmploye }
+            };
+
+            DataTable dataTable = connexion.RecupererDonnees(query, parameters);
+
+            return dataTable.Rows.Count > 0;
+        }
     }
 }

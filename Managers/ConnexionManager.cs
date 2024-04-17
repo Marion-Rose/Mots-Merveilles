@@ -10,23 +10,34 @@ using System.Threading.Tasks;
 
 namespace Mots_Merveilles.Managers
 {
-
-    internal class ConnexionManager
+    /// <summary>
+    /// Classe permettant de gérer la connexion à la base de données
+    /// </summary>
+    public class ConnexionManager
     {
         private SqlConnection connexion; //Connexion à la base de données
         private SqlCommand cmd; //Commande SQL à éxécuter
         private DataTable dt;//Tableau de données, où seront stockées les données récupérées
         private SqlDataAdapter sda;//transforme les données SQL en données C#
         private string strConnection;//stocke la chaine de connexion à la base de données
-        public ConnexionManager() //Constructeur
+
+        /// <summary>
+        /// Constructeur de la classe ConnexionManager
+        /// </summary>
+        public ConnexionManager()
         {
             this.strConnection = "Data Source=PC-MARION\\SQLEXPRESS;Initial Catalog=library;Integrated Security=True";
             this.connexion = new SqlConnection(strConnection);
             this.cmd = new SqlCommand();
             cmd.Connection = connexion;
-        //    this.strConnection = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString;
         }
 
+        /// <summary>
+        /// Méthode permettant de récupérer des données de la base de données
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="parameters"></param>
+        /// <returns>Table de données</returns>
         public DataTable RecupererDonnees(string query, SqlParameter[]? parameters = null)
         {
             DataTable dt = new DataTable();
@@ -58,6 +69,12 @@ namespace Mots_Merveilles.Managers
             return dt;
         }
 
+        /// <summary>
+        /// Méthode permettant d'envoyer des données à la base de données
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="parameters"></param>
+        /// <returns>Nombre de lignes exécutées</returns>
         public int EnvoyerDonnees(string query, SqlParameter[] parameters)
         {
             int nbRow = 0;
