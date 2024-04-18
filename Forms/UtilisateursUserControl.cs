@@ -232,9 +232,9 @@ namespace Mots_Merveilles.Forms
                 }
                 else
                 {
-                    if (txtIdentifiant.Text == "" || txtMDP.Text == "" || comboBoxGroupe.Text == "")
+                    if (txtIdentifiant.Text == "" || comboBoxGroupe.Text == "")
                     {
-                        MessageBox.Show("Veuillez remplir tous les champs", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Veuillez remplir les champs identifiant et groupe", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                     else
@@ -242,7 +242,7 @@ namespace Mots_Merveilles.Forms
                         try
                         {
                             this.utilisateurSelectionne.SetIdentifiant(txtIdentifiant.Text);
-                            this.utilisateurSelectionne.SetMotDePasse(txtMDP.Text);
+                            if(txtMDP.Text != "") { this.utilisateurSelectionne.SetMotDePasse(txtMDP.Text); }
                             this.utilisateurSelectionne.SetEstActif(checkBoxActif.Checked);
                             this.utilisateurSelectionne.SetGroupe((GroupeUtilisateur)comboBoxGroupe.SelectedItem);
                           
