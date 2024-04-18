@@ -1,7 +1,0 @@
-- vérifier que l'utilisateur soit actif
-- vérifier qu'il est les droits
-- convertir les noms en MAJUSCULE
-- cacher MDP utilisateur dans la grid View
-- Hacher et saler les MDP
-- Emepcher la création si utilisateur/livre/editeur similaire
-- changer le curseur sur les boutons

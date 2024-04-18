@@ -14,12 +14,20 @@ namespace Mots_Merveilles.Forms
 {
     public partial class Connexion : Form
     {
+        /// <summary>
+        /// Formulaire de connexion
+        /// </summary>
         public Connexion()
         {
             InitializeComponent();
             MessageBox.Show("Voici les utilisateurs enregistrés : \nm.tulipe m.tulipe Administrateur\nj.dubois j.dubois Manageur\nm.martin m.martin Employé");
         }
 
+        /// <summary>
+        /// Gestion de la connexion
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btConnexion_Click(object sender, EventArgs e)
         {
             if (Authentification.Instance().Authentication(this.txtIdentifiant.Text, this.txtMDP.Text))
@@ -31,6 +39,11 @@ namespace Mots_Merveilles.Forms
 
         }
 
+        /// <summary>
+        /// Réinitialisation des champs
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btReinitialiser_Click(object sender, EventArgs e)
         {
             txtIdentifiant.Text = "";

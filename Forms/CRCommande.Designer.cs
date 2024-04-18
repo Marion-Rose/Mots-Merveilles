@@ -245,6 +245,7 @@
             Controls.Add(lbNumero);
             Controls.Add(txtNumero);
             Name = "CRCommande";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "CRCommande";
             ((System.ComponentModel.ISupportInitialize)numUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
